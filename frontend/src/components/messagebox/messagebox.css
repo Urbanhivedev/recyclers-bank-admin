@@ -1,0 +1,22 @@
+.messageboxContainer {
+    flex:1;
+    margin:0 20px;
+    padding: 30px;
+    border-radius:10px;
+    max-height: 25vh;
+    overflow: hidden;
+
+    /*doing display flex to mush the messages together*/
+    display:flex;
+    flex-direction: column;
+    justify-content: flex-start;
+
+    -webkit-box-shadow:0px 0px 0px 11px -1px #000000;
+    box-shadow:0px 0px 11px -1px #000000;
+     
+}
+
+.messageTitle {
+    position: relative;
+    
+}

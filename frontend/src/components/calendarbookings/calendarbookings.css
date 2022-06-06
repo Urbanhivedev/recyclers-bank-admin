@@ -1,0 +1,34 @@
+.calendarContainer {
+    flex:3;
+
+    padding:20px;
+    margin:20px;
+    border-radius: 20px;
+   box-shadow:0px 0px 15px -10px rgba(0,0,0,0.8);
+    -webkit-box-shadow:0px 0px  15px -10px rgba(0,0,0,0.8);
+    
+}
+
+.calendarStyle {
+    margin: 1em  6em;
+    padding: 1em;
+    
+    color: #333;
+    border: 1px solid #f0f0f0;
+    border-radius: 5px;
+    text-align: center;
+    min-width: 300px;
+    
+    
+   box-shadow:0px 0px 15px -10px rgba(0,0,0,0.8);
+    -webkit-box-shadow:0px 0px  15px -10px rgba(0,0,0,0.8);
+}
+
+.widgetCalTitle {
+    font-size: 25px;
+    font-weight: 700;
+    padding:30px;
+    display: flex;
+     justify-content: center;
+      /*text-align: center;*/
+}

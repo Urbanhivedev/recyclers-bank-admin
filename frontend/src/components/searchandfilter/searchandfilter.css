@@ -1,0 +1,71 @@
+
+.positionAdjuster {
+    
+    max-width:1400px;
+    margin-top: 10px;
+  
+}
+
+
+
+.searchAndFilterContainer {
+ display:flex;
+ margin-top:30px;
+ margin-bottom: 10px;
+ justify-content:space-around;
+ align-items: center;
+
+}
+
+.propertyLabel {
+    flex:1;
+    display:flex;
+    justify-content: center;
+    padding:0;
+    margin-right: -3%; /*bad practice , but i'll sort this out later*/
+    
+}
+
+@media screen and (max-width:1100px) {
+    
+    .propertyLabel {
+       
+        margin-right: 1%; /*bad practice , but i'll sort this out later*/
+        
+    }
+    
+
+
+}
+
+.searchBox {
+
+    flex:3;
+    margin-left: 0%;
+    margin-right: 0%;
+   
+}
+
+.inputBox {
+    width:95%;
+    padding:14px;
+    background-color: rgba(202, 202, 145, 0.568);
+    border-width:1px;
+    margin:0 auto;
+    
+}
+
+.filterAndLogo{
+    max-width:110px;
+   
+   
+    flex:1;
+    display: flex;
+    justify-content: space-between;
+    align-items: center; 
+
+   border-style: solid;
+   border-width:1px;
+   padding:10.5px;
+}
+

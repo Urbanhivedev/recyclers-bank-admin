@@ -1,0 +1,32 @@
+.homeContainer {
+    display:flex;
+    flex-direction:column;
+    justify-content:space-between;
+    width:100%;
+    padding-left:1%;
+    padding-right:10%;
+    padding-top: 5%;
+    padding-bottom:5%;
+}
+
+.chartsAndMessages {
+    margin-top: 40px; /* ideally , I should use some sort of padding , to push neigbouring elements away , but this workds for now */
+    flex:1;
+    display:flex;
+    width:100%; /*this width is the width from right of dashboard
+                 to the right side of the screen*/
+    justify-content:space-between;
+    
+}
+
+
+.searchComponent{
+    flex:0.2;
+    
+}
+
+
+.propertyList {
+    margin-top: 40px; /* ideally , I should use some sort of padding , to push neigbouring elements away , but this workds for now */
+    flex:3;
+}
