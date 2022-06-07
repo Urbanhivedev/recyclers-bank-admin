@@ -40,6 +40,8 @@
 .houseStats {
     display:flex;
     justify-content: space-around;
+   font-size: large;
+   font-weight: bold;
 }
 
 .percentAppreciation {
@@ -55,10 +57,17 @@
 
 .price {
 
-
+  
 }
 
 .view {
 
-
+   padding:7px 20px 7px 20px;
+   
+   border-radius: 5px;
+   background-color: black;
+   color:white;
+   font-size: large;
+   font-weight: bold;
+   margin-top: 10px;
 }
