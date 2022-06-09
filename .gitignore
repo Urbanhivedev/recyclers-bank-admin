@@ -14,7 +14,7 @@ node_modules/
 /frontend/build
 
 #firebase
-ServiceAccountKey.json
+/backend/ServiceAccountKey.json
 
 # misc
 .DS_Store
