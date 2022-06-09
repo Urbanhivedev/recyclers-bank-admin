@@ -36,11 +36,19 @@ export default function Propertylist() {
          {/* the property list below will be a forEach , and i will load as many
           components as the database warrants me to, but for now, I will just hard code like 5 items */}
            
-        <div className="propertyList">
+        <div >
              <Propertyitem/> 
         </div>
 
-        <div className="propertyList">
+        <div >
+             <Propertyitem/> 
+        </div>
+
+        <div >
+             <Propertyitem/> 
+        </div>
+
+        <div>
              <Propertyitem/> 
         </div>
          

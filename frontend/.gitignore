@@ -13,7 +13,7 @@ node_modules/
 /build
 
 #firebase
-catex-54325-firebase-adminsdk-w2awh-cd5ae593e1.json
+ServiceAccountKey.json
 
 # misc
 .DS_Store

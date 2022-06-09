@@ -1,6 +1,6 @@
 .propertyitemContainer {
     
-    margin:0 20px;
+    margin:40px 20px;
     padding: 30px;
     border-radius:10px;
    
@@ -33,9 +33,9 @@
  flex-direction:column;
 }
 
-.address {
+/*.address {
 
-}
+}*/
 
 .houseStats {
     display:flex;
@@ -44,10 +44,10 @@
    font-weight: bold;
 }
 
-.percentAppreciation {
+/*.percentAppreciation {
 
 
-}
+}*/
 
 .priceAndView {
     display:flex;
@@ -55,10 +55,10 @@
 
 }
 
-.price {
+/*.price {
 
   
-}
+}*/
 
 .view {
 

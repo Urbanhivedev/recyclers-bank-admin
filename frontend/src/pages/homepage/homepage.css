@@ -28,5 +28,8 @@
 
 .propertyList {
     margin-top: 40px; /* ideally , I should use some sort of padding , to push neigbouring elements away , but this workds for now */
+    height: 20%;
     flex:3;
+    overflow: scroll;
+    max-height: 55vh;
 }

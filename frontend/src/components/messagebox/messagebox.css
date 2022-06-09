@@ -4,7 +4,7 @@
     padding: 30px;
     border-radius:10px;
     max-height: 25vh;
-    overflow: hidden;
+    overflow: scroll;
 
     /*doing display flex to mush the messages together*/
     display:flex;

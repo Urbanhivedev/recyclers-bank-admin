@@ -12,7 +12,10 @@ export default function Messagebox (){
           <h4 className="messageTitle"> New Messages</h4>
               <Messageitem/>
               <Messageitem/>
-              
+              <Messageitem/>
+              <Messageitem/>
+              <Messageitem/>
+              <Messageitem/>
               
            </div>   
          

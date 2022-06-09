@@ -43,12 +43,27 @@ export default function Homepage() {
           components as the database warrants me to, but for now, I will just hard code like 5 items */}
            
         <div className="propertyList">
+           
+          <div >
              <Propertyitem/> 
-        </div>
+             </div>
+        
 
-        <div className="propertyList">
+          <div >
              <Propertyitem/> 
-        </div>
+          </div>
+
+             <div>
+              <Propertyitem/> 
+            </div>
+        
+                    
+            <div>
+              <Propertyitem/> 
+             </div>
+
+
+        </div> {/*property list end */}
          
           
       </div>
