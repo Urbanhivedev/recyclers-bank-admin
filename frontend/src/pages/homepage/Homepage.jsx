@@ -4,8 +4,10 @@ import "./homepage.css";
 import Chartbox from  "../../components/chartbox/Chartbox"
 import Messagebox from  "../../components/messagebox/Messagebox"
 import Propertyitem from  "../../components/propertyitem/Propertyitem"
-/*import {Link} from "react-router-dom";*/
+
 import Searchandfilter from '../../components/searchandfilter/Searchandfilter';
+
+
 import axios from 'axios'  
 
 

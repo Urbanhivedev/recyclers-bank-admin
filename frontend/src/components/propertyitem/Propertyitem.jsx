@@ -3,6 +3,7 @@ import './propertyitem.css';
 import Chartbox from '../chartbox/Chartbox';
 import House1 from '../../images/house1.jpeg';
 import Actualchart from '../chartbox/Actualchart';
+import {Link} from "react-router-dom";
 
 export default function Propertyitem (){
        
@@ -35,10 +36,12 @@ export default function Propertyitem (){
               <div className="price">
                 $36750
               </div>
-              <button className="view">
+
+              <Link to={"/propertyview"}>
+              <button  type="button" className="view">
                 View
               </button>
-
+              </Link>
 
             </div>
              
