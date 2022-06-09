@@ -1,5 +1,6 @@
 import React from 'react';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
+import CustomizedLabel from './Customizedlabel';
 
 const data = [
   {
@@ -55,10 +56,10 @@ export default function Actualchart (){
          
          
          <ResponsiveContainer width="100%" height="85%">
-          <LineChart data={data}>
+          <LineChart data={data} >
           { <XAxis datakey="name" stroke="#5550bd"/>}
-         { /* <YAxis type="number" /*domain={[0, 100000]} *//*/>*/}
-            <Line type="monotone" dataKey="uv" stroke="#5550bd" />
+          <YAxis type="number"  tickCount="0" axisLine={false} tickLine={false} ticks={['$']} domain={[0, 5000]} label={{ value: 'value($)', angle: -90, position: 'insideLeft' }}  />
+            <Line type="monotone" dataKey="uv" stroke="#5550bd" label={<CustomizedLabel/>} />
           </LineChart>
          </ResponsiveContainer>
          
