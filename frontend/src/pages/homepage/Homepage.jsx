@@ -23,7 +23,7 @@ export default function Homepage() {
    const [searchDone,setSearchDone] = useState(false);
    const [filteredAddresses,setFilteredAddresses] = useState([]);
    
-   const videoRef = useRef();
+   const filterRef = useRef();
   
    const addressList = [ "234 ABBEY ROAD HOUSTON, TEXAS" , "19 WEST LANE HOUSTON,TEXAS" , "40 DRISCOLL STREET HOUSTON,TEXAS" ]
 
@@ -46,7 +46,14 @@ export default function Homepage() {
   
    
   
-   
+   const upMenu = function(){
+      filterRef.current.style.opacity = 1
+   }
+
+   const downMenu = function(){
+
+      filterRef.current.style.opacity = 0
+   }
 
 
    const showSearchResult = function(){
@@ -97,11 +104,15 @@ export default function Homepage() {
               </button>
         
         {/*filter and it's icon*/}
-         <div className="filterAndLogo">
-        <FilterListIcon className="filterIcon"/>
+         <div className="filterAndLogo" onMouseEnter={upMenu} onMouseLeave={downMenu}>
+        <FilterListIcon className="filterIcon" />
          FILTER   
          </div>
-
+    
+        <div className="filterOptions" ref={filterRef} onMouseEnter={upMenu} onMouseLeave={downMenu}>
+          <div className="optionItem1"> by price</div>
+          <div className="optionItem2">by purchase date</div>
+        </div>
 
         
     </div>
