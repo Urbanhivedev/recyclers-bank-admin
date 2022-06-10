@@ -85,7 +85,7 @@ export default function PropertyView() {
              </div>
             
              <div className="controls">
-               <button className="button">BUY</button> {/*the styling for button is in propertyitem.css */}
+               <button className="button">BUY</button> 
                <button className="button">SELL</button>
                <button className="button">OFFER</button>
                <button className="button">VOTE</button>

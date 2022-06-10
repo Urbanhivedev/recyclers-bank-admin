@@ -5,7 +5,7 @@ import House1 from '../../images/house1.jpeg';
 import Actualchart from '../chartbox/Actualchart';
 import {Link} from "react-router-dom";
 
-export default function Propertyitem (){
+export default function Propertyitem (props){
        
      
 
@@ -24,7 +24,7 @@ export default function Propertyitem (){
 
          <div className="houseInfoContainer">
           
-          <div className="address">234 ABBEY ROAD ,TX 77001 </div>
+          <div className="address">{props.address.toUpperCase()}</div>
            <div className="houseStats">
           
             <div className="percentAppreciation">
