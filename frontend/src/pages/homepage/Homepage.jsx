@@ -1,6 +1,9 @@
 import React,{useEffect, useState, useRef} from 'react';
 import Grid from '@mui/material/Grid';
 import FilterListIcon from '@mui/icons-material/FilterList';
+import ArrowUpwardIcon from '@mui/icons-material/ArrowUpward';
+import ArrowDownwardIcon from '@mui/icons-material/ArrowDownward';
+
 import "./homepage.css";
 import Chartbox from  "../../components/chartbox/Chartbox"
 import Messagebox from  "../../components/messagebox/Messagebox"
@@ -110,8 +113,9 @@ export default function Homepage() {
          </div>
     
         <div className="filterOptions" ref={filterRef} onMouseEnter={upMenu} onMouseLeave={downMenu}>
-          <div className="optionItem1"> by price</div>
-          <div className="optionItem2">by purchase date</div>
+          <div className="optionItem1"> Value {'(Asc)'} <ArrowUpwardIcon className="ArrowIcon"/></div>
+          <div className="optionItem2">Value {'(Desc)'}  <ArrowDownwardIcon className="ArrowIcon"/></div>
+          <div className="optionItem2">City</div>
         </div>
 
         

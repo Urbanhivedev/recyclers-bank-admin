@@ -95,3 +95,15 @@
     color:white;
     border-color: black;
 }
+
+ .ArrowIcon {
+    background-color:/* rgb(30, 121, 3)*/ black;
+    color:white;
+ }
+
+
+.ArrowIcon.active ,  .ArrowIcon:hover {
+    background-color:/* rgb(30, 121, 3)*/ black;
+    color:white;
+
+}
