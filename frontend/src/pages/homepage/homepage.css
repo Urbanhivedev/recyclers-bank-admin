@@ -7,7 +7,13 @@
     padding-right:10%;
     padding-top: 5%;
     padding-bottom:5%;
+    background-color: #ffffff;
 }
+
+.positionAdjuster{
+    background-color: #ffffff;
+}
+
 
 .chartsAndMessages {
     margin-top: 40px; /* ideally , I should use some sort of padding , to push neigbouring elements away , but this workds for now */
@@ -16,13 +22,21 @@
     width:100%; /*this width is the width from right of dashboard
                  to the right side of the screen*/
     justify-content:space-between;
-    
+    background-color: #ffffff;
 }
 
 
 .searchComponent{
     flex:0.2;
     
+}
+
+.searchAndFilterContainer {
+    background-color: #ffffff;  /* its better to have a whole body icon that one can apply background color to, but i will refactor later*/
+}
+
+.searchBox{
+    background-color: #ffffff;
 }
 
 .searchButton {
@@ -49,10 +63,24 @@
     flex:3;
     overflow: scroll;
     max-height: 55vh;
+    background-color: #ffffff;
 }
 
 
+.propertyLabel {
+    background-color: #ffffff;
+}
+
+.filterAndLogo{
+    background-color: #ffffff;
+}
+
+.filterIcon {
+    background-color: #ffffff;
+}
+
 /*temporary*/
+
 
 .filterOptions {
     display: flex;

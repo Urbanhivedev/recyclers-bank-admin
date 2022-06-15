@@ -35,7 +35,7 @@ a {
 
 .sidebarTitle {
     /*font-size:13px;*/
-    color:rgb(187,186,186);
+    color:#ffffff;
     background-color: rgb(30, 121, 3); /*I gotta enforce background color here cuz each item  was focing it's own background color*/
 
 }

@@ -133,9 +133,9 @@ export default function Homepage() {
         addressList.map((item,i)=>{
   
           return (
-               <div >
+              
                <Propertyitem key={i} address={item}/> 
-               </div>
+              
           )
          
    
