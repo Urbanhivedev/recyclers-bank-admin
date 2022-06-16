@@ -34,9 +34,9 @@ export default function Homepage() {
 
    addressList.forEach((address) => {
    
-      /*console.log(regex.test(address))*/
+     
 
-    if (/*searchTerm.toUpperCase() == address*/ address.includes(searchTerm.toUpperCase())){
+    if (searchTerm && address.includes(searchTerm.toUpperCase())){
        setFilteredAddresses([address])
      
     }

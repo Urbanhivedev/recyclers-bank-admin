@@ -24,7 +24,7 @@ export default function Propertyitem (props){
 
          <div className="houseInfoContainer">
           
-          <div className="address">{props.address.toUpperCase()}</div>
+          <div className="address">{props.address?props.address.toUpperCase():"234 ABBEY ROAD HOUSTON, TEXAS"}</div>
            <div className="houseStats">
           
             <div className="percentAppreciation">

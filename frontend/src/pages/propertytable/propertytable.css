@@ -1,0 +1,64 @@
+
+.propertyTableContainer{
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    
+    
+    width: 100%;
+    
+    padding: 0 30px;
+    margin-top: 70px;
+    
+    background-color: #ffffff;
+
+}
+
+.propertyTablePreamble {
+    display: flex;
+    justify-content: space-between;
+}
+
+.backgroundColor {
+    background-color: #ffffff;
+}
+
+
+.table {
+    background-color: #ffffff;
+    border-collapse: collapse;
+    width: 100%;
+    
+  }
+  
+  .td, .th {
+    border: 4px solid #dddddd;
+    text-align: left;
+    padding: 20px;
+    background-color: #ffffff;
+  }
+  
+  .tr:nth-child(even) {
+    background-color: #dddddd;
+  }
+
+  /*button styles*/
+
+  .buttonStyle {
+
+   
+
+    padding:7px 20px 7px 20px;
+    
+    border-radius: 5px;
+    background-color: black;
+    color:white;
+    font-size: large;
+    font-weight: bold;
+    
+ 
+}
+
+.iconNB {
+    background-color: black;
+}

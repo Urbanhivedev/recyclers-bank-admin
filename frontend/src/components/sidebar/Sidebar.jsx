@@ -10,6 +10,8 @@ import SettingsIcon from '@mui/icons-material/Settings';
 import HomeIcon from '@mui/icons-material/Home';
 import NearMeIcon from '@mui/icons-material/NearMe';
 import AccountBalanceIcon from '@mui/icons-material/AccountBalance';
+import SupervisedUserCircleIcon from '@mui/icons-material/SupervisedUserCircle';
+import MapsHomeWorkIcon from '@mui/icons-material/MapsHomeWork';
 
 import {BrowserRouter as Router ,Link} from "react-router-dom";
 
@@ -63,6 +65,43 @@ export default function Sidebar() {
                     <h3 className="sidebarTitle"> MESSAGES </h3>
                    
                 </div> {/*sidebar menu closing */}
+
+
+                <div className="sidebarMenu">
+                    <h3 className="sidebarTitle">ADMIN</h3>
+                   <ul className="sidebarList">
+                     
+                      {/*I had to assign each emoji component a classname here, to enforce background color*/ }
+                     
+                    
+                 <Link to ={"/admin/propertylist"} className="linkref">
+                     <li className="sidebarListItem">
+                         <MapsHomeWorkIcon  className="sidebarListItemIcon"/>
+                         Manage Properties 
+                         
+                     </li>
+                </Link> 
+
+
+
+                     <Link  className="linkref" to={"/admin/userlist"}>
+                     <li className="sidebarListItem">
+                       
+                         <SupervisedUserCircleIcon className="sidebarListItemIcon"/>
+                            Manage Users 
+                   
+                     </li>
+                    </Link> 
+
+                     
+
+
+                    </ul> 
+                </div> {/*sidebar menu closing */}
+
+
+
+
 
 
                 <div className="sidebarMenu">
