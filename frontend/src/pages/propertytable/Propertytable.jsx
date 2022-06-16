@@ -97,7 +97,7 @@ export default function Propertytable() {
            <th className='th'>OWNERS</th>
            <th className='th'>ADDRESS</th>
            <th className='th'>BUILT</th>
-           <th className='th'>OFFPLAN</th>
+           <th className='th'>OFF-PLAN</th>
            <th className='th'></th>
            <th className='th'></th>
          </tr>
@@ -113,7 +113,7 @@ export default function Propertytable() {
              
               <td className='td'>    
               <Link to={`/admin/user/${property._id}/edit`}>
-                <Button className = "buttonStyle" >
+                <Button className = "buttonStyle">
                   <EditIcon className = "iconNB"/> Edit
                 </Button>
                </Link>

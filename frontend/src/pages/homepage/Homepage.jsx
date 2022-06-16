@@ -176,6 +176,52 @@ export default function Homepage() {
 
         </div> {/*property list end */}
          
+
+        <div className="pagination backgroundColor">
+      <button className="btn backgroundColor">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          className="btn--icon backgroundColor"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+          stroke-width="2"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            d="M15 19l-7-7 7-7"
+          />
+        </svg>
+      </button>
+      <div className="pages backgroundColor">
+        <a className="page active">1</a>
+        <a className="page">2</a>
+        <a className="page ">3</a>
+        <a className="page">4</a>
+        <a className="page">5</a>
+        <a className="page">6</a>
+        <a className="page">...</a>
+        <a className="page">23</a>
+      </div>
+      <button className="btn backgroundColor">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          class="btn--icon backgroundColor"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+          stroke-width="2"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            d="M9 5l7 7-7 7"
+          />
+        </svg>
+      </button>
+    </div>
+
           
       </div>
         
