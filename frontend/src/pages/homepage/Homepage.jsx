@@ -26,11 +26,33 @@ export default function Homepage() {
    const [searchDone,setSearchDone] = useState(false);
    const [filteredAddresses,setFilteredAddresses] = useState([]);
    
+   /*const [addressList,setaddressList] = useState([]);*/
+   
    const filterRef = useRef();
   
    const addressList = [ "234 ABBEY ROAD HOUSTON, TEXAS" , "19 WEST LANE HOUSTON,TEXAS" , "40 DRISCOLL STREET HOUSTON,TEXAS" ]
 
-  useEffect(()=>{
+ 
+   useEffect(()=>{
+
+     const fetchProperties = async() => {
+      
+     const {data} = await axios.get('/api/properties') //{data} is object destructuring from what we get back from axios , i totally forgot about object destructuring
+    
+      setAddressList(data)
+
+    }
+
+    fetchProperties()
+
+ /*no need to put any dependencies in use effect just yet, I want the fetch to happen only when the page is loaded */
+  },[])
+ 
+ 
+ 
+ 
+ 
+   useEffect(()=>{
 
    addressList.forEach((address) => {
    
@@ -154,25 +176,7 @@ export default function Homepage() {
           })
         }
 
-       {/*
-          <div >
-             <Propertyitem address={item}/> 
-             </div>
-        
-
-          <div >
-             <Propertyitem/> 
-          </div>
-
-             <div>
-              <Propertyitem/> 
-            </div>
-        
-                    
-            <div>
-              <Propertyitem/> 
-             </div> */}
-
+       
 
         </div> {/*property list end */}
          

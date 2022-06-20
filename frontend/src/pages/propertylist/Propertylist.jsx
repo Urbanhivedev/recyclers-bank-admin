@@ -8,18 +8,27 @@ import Propertyitem from  "../../components/propertyitem/Propertyitem"
 import Searchandfilter from '../../components/searchandfilter/Searchandfilter';
 import axios from 'axios'  
 
-export default function Propertylist() {
+export default function Propertylist() {   /*to fetch info from a url . it is props.match ,cuz match is inside props by default */
    
    let url; /*the link to get the rsources (or the backend info) */
    const [allVideos,setAllVideos] = useState(''); /*this is where database data will reside */ 
+    /*const [addressList,setaddressList] = useState([]);*/
    
-   const videoRef = useRef();
+  
   
 
 
   useEffect(()=>{
 
-    
+     const fetchProperties = async() => {
+      
+          const {data} = await axios.get('/api/properties') //{data} is object destructuring from what we get back from axios , i totally forgot about object destructuring
+         
+           setAddressList(data)
+     
+         }
+     
+         fetchProperties()
 
   },[url])
   
@@ -51,9 +60,35 @@ export default function Propertylist() {
         <div>
              <Propertyitem/> 
         </div>
+
+        {/*filteredAddresses.length === 0 ? 
+        
+        addressList.map((item,i)=>{
+  
+          return (
+              
+               <Propertyitem key={i} address={item}/> 
+              
+          )
+         
+   
+             })
+
+        :
+        
+        filteredAddresses.map((item,i)=>{
+  
+       return (
+            <div >
+            <Propertyitem key={i} address={item}/> 
+            </div>
+       )
+
+          })
+        */}
          
           
-      </div>
+      </div> {/* propertyListcontainer END */}
         
       </> 
       
