@@ -39,7 +39,7 @@ export default function Homepage() {
       
      const {data} = await axios.get('/api/properties') //{data} is object destructuring from what we get back from axios , i totally forgot about object destructuring
     
-      setAddressList(data)
+      /*setAddressList(data)*/
 
     }
 
