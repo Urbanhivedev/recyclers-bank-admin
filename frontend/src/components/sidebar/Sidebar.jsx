@@ -66,7 +66,8 @@ export default function Sidebar() {
                    
                 </div> {/*sidebar menu closing */}
 
-
+                   <br/>
+                   
                 <div className="sidebarMenu">
                     <h3 className="sidebarTitle">ADMIN</h3>
                    <ul className="sidebarList">

@@ -21,9 +21,9 @@ export default function Topbar(){
 
         {/*1*/}   <div className="topRight">
                         <div className="topbarIconContainer">
-                          <Settings/>
-                         <NotificationsNone/>
-                         <span className="topIconBagde">
+                          <Settings className="settingsIcon"/>
+                         <NotificationsNone className="notificationIcon"/>
+                         <span className="topIconBadge">
                              2
                          </span>
                       </div>

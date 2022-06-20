@@ -35,26 +35,30 @@ export default function Propertytable() {
     _id:"1",
     address:"234 ABBEY ROAD HOUSTON, TEXAS",
     owners:"kenny Dominguez",
-    built:true
+    built:true,
+    price:"$327,550"
     
 
   },{
     _id:"2",
     address:"19 WEST LANE HOUSTON, TEXAS",
     owners:"Rita Dominguez",
-    built:false
+    built:false,
+    price:"$211,550"
 
   },{
     _id:"3",
     address:"40 DRISCOLL STREET HOUSTON, TEXAS",
     owners:"Trey kennedy",
-    built:false
+    built:false,
+    price:"$107,520"
 
   },{
     _id:"4",
     address:"234 ABBEY ROAD HOUSTON, TEXAS",
     owners:"Aubrey Graham",
-    built:true
+    built:true,
+    price:"$427,600"
 
   }]
   
@@ -98,6 +102,7 @@ export default function Propertytable() {
            <th className='th'>ADDRESS</th>
            <th className='th'>BUILT</th>
            <th className='th'>OFF-PLAN</th>
+           <th className='th'>PRICE</th>
            <th className='th'></th>
            <th className='th'></th>
          </tr>
@@ -108,8 +113,9 @@ export default function Propertytable() {
               <td className='td'>{property._id}</td>
               <td className='td' >{property.owners}</td>
               <td className='td backgroundColor'>{property.address}</td>
-              <td className='td backgroundColor'>{property.built && <DoneIcon/> }</td>
-              <td className='td backgroundColor'>{!property.built && <DoneIcon/>}</td>
+              <td className='td backgroundColor'>{property.built && <DoneIcon className=' backgroundColor'/> }</td>
+              <td className='td backgroundColor'>{!property.built && <DoneIcon className=' backgroundColor'/>}</td>
+              <td className='td backgroundColor'>{property.price}</td>
              
               <td className='td'>    
               <Link to={`/admin/user/${property._id}/edit`}>

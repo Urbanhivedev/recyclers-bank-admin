@@ -57,9 +57,9 @@ export default function Actualchart (){
          
          <ResponsiveContainer width="100%" height="85%">
           <LineChart data={data} >
-          { <XAxis datakey="name" stroke="#5550bd"/>}
+          { <XAxis datakey="name" stroke="#000000"/>}
           <YAxis type="number"  tickCount="0" axisLine={false} tickLine={false} ticks={['$']} domain={[0, 100000]} label={{ value: 'value($)', angle: -90, position: 'insideLeft' }}  />
-            <Line type="monotone" dataKey="uv" stroke="#5550bd" label={<CustomizedLabel/>} />
+            <Line type="monotone" dataKey="uv" stroke="#000000" label={<CustomizedLabel/>} />
           </LineChart>
          </ResponsiveContainer>
          
