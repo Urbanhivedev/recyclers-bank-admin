@@ -163,7 +163,7 @@ export default function Homepage() {
   
           return (
               
-               <Propertyitem imageLink ={House1} key={i} address={item} /> 
+               <Propertyitem imageLink ={House2} key={i} address={item} /> 
               
           )
          
