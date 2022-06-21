@@ -3,7 +3,7 @@
 }
 
 .propertyitemContainer {
-    
+   
     margin:40px 20px;
     padding: 30px;
     border-radius:10px;
@@ -40,6 +40,10 @@
 /*.address {
 
 }*/
+
+.houselistpic {
+    max-width: 300px;
+}
 
 .houseStats {
     display:flex;

@@ -37,7 +37,12 @@ a {
     /*font-size:13px;*/
     color:#ffffff;
     background-color: rgb(30, 121, 3); /*I gotta enforce background color here cuz each item  was focing it's own background color*/
+    transition: font-size 0.2s;
+}
 
+.clickable:hover{
+    color: rgb(135, 221, 109);
+    font-size: 20px;
 }
 
 

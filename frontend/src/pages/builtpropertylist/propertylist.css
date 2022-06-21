@@ -1,5 +1,6 @@
 .propertyListContainer {
     
+    background: #ffffff !important;
     padding-top: 9%;
    
     display:flex;
@@ -8,6 +9,6 @@
     width:100%;
     overflow: scroll;
     height:20%;
-    background-color: #ffffff;
+   
 }
 

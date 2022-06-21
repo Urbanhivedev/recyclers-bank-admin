@@ -23,73 +23,14 @@ import morgan from 'morgan'
 import admin from 'firebase-admin' ;
 //import serviceAccount from './ServiceAccountKey.json' ;
 
-import { getFirestore, collection, where , query ,getDocs ,addDoc, deleteDoc ,doc, getDoc } from 'firebase/firestore';
-import { initializeApp } from 'firebase/app'
+import propertyRoutes from './routes/propertyRoutes.js'
+//const propertyRoutes =require('./routes/productRoutes.js')
+
 
  
 dotenv.config()
 
-
-
-const firebaseConfig = {
-  apiKey: process.env.API_KEY,
-  authDomain: process.env.AUTH_DOMAIN,
-  projectId: process.env.PROJECT_ID,
-  storageBucket: process.env.STORAGE_BUCKET,
-  messagingSenderId: process.env.MESSAGING_SENDER_ID,
-  appId: process.env.APP_ID,
-  measurementId: process.env.MEASUREMENT_ID
-};
-
-
-
-
-
-/*admin.initializeApp({             there used to be a JSON.stringify below but it works just fine without it
-  credential:admin.credential.cert(serviceAccount)
-})
-
-
-const db = admin.firestore();*/
-
-/*just an experiment to try the other firebase way */
-initializeApp(firebaseConfig) /*it doesn't work because you need the firebaseconfig API , not serviceAcconut*/
-
-const dbtest = getFirestore()
-
-const colRef = collection(dbtest , "estate")
-
-getDocs(colRef)
- .then((snapshot) => {
-
-     let books = []
-     snapshot.docs.forEach((doc) => {
-
-      books.push({...doc.data() , id:doc.id })
-     }) 
-      console.log(books)
-
- })
-
-
- /*just an experiment to try the other firebase way end */
-
-const docRef = query( doc(dbtest,"estate", "collection"))
-
-getDoc(docRef)
- .then((doc) => {
-  
-  console.log(doc)
-   
-
-  /* console.log(doc.data().data.filter(item => {return item.percentage === "15%"}))*/
-   
- } )
-
-
-
-
- const app = express()
+const app = express()
 if(process.env.NODE_ENV === 'development'){app.use(morgan('dev'))} //I prefer to use morgan in development and not in production
 
  app.use(express.json())  //this is the new bodyParser that is in express and allows us to read json from req.body
@@ -97,6 +38,8 @@ if(process.env.NODE_ENV === 'development'){app.use(morgan('dev'))} //I prefer to
 
 
 /*app.use(cors())*/
+app.use('/api/properties',propertyRoutes)
+
 
 
 

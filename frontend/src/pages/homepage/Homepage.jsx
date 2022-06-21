@@ -26,11 +26,11 @@ export default function Homepage() {
    const [searchDone,setSearchDone] = useState(false);
    const [filteredAddresses,setFilteredAddresses] = useState([]);
    
-   /*const [addressList,setaddressList] = useState([]);*/
+   const [addressList,setAddressList] = useState([]);
    
    const filterRef = useRef();
   
-   const addressList = [ "234 ABBEY ROAD HOUSTON, TEXAS" , "19 WEST LANE HOUSTON,TEXAS" , "40 DRISCOLL STREET HOUSTON,TEXAS" ]
+  /* const addressList = [ "234 ABBEY ROAD HOUSTON, TEXAS" , "19 WEST LANE HOUSTON,TEXAS" , "40 DRISCOLL STREET HOUSTON,TEXAS" ]*/
 
  
    useEffect(()=>{
@@ -39,7 +39,7 @@ export default function Homepage() {
       
      const {data} = await axios.get('/api/properties') //{data} is object destructuring from what we get back from axios , i totally forgot about object destructuring
     
-      /*setAddressList(data)*/
+      setAddressList(data)
 
     }
 

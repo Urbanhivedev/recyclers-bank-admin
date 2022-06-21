@@ -23,8 +23,9 @@ export default function Sidebar() {
         <div className="sidebar">
             <div className="sidebarWrapper">
                 <div className="sidebarMenu">
-                    <h3 className="sidebarTitle">DASHBOARD</h3>
-                   
+                <Link to ={'/'} className="linkref">
+                    <h3 className="sidebarTitle clickable">DASHBOARD</h3>
+                </Link> 
                 </div> {/*sidebar menu closing */}
 
 
@@ -35,7 +36,7 @@ export default function Sidebar() {
                       {/*I had to assign each emoji component a classname here, to enforce background color*/ }
                      
                     
-                 <Link to ={'/'} className="linkref">
+                 <Link to ={'/properties/built'} className="linkref">
                      <li className="sidebarListItem">
                          <AccountBalanceIcon  className="sidebarListItemIcon"/>
                          Built 
@@ -45,7 +46,7 @@ export default function Sidebar() {
 
 
 
-                     <Link  className="linkref" to={"/properties"}>
+                     <Link  className="linkref" to={"/properties/offplan"}>
                      <li className="sidebarListItem">
                        
                          <NearMeIcon className="sidebarListItemIcon"/>
@@ -67,6 +68,16 @@ export default function Sidebar() {
                 </div> {/*sidebar menu closing */}
 
                    <br/>
+
+
+                   <div className="sidebarMenu">
+                    <h3 className="sidebarTitle">SETTINGS </h3>
+                  
+                </div>
+               
+                <br/>
+                   <br/>
+                   <br/> {/**maybe later i will use CSS margins to create spaces between options, not margins */}
                    
                 <div className="sidebarMenu">
                     <h3 className="sidebarTitle">ADMIN</h3>
@@ -102,13 +113,7 @@ export default function Sidebar() {
 
 
 
-
-
-
-                <div className="sidebarMenu">
-                    <h3 className="sidebarTitle">SETTINGS </h3>
-                  
-                </div> {/*sidebar menu closing */}
+                 {/*sidebar menu closing */}
 
 
 

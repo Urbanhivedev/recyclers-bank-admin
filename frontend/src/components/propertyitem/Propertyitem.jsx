@@ -2,6 +2,7 @@ import React from 'react';
 import './propertyitem.css';
 import Chartbox from '../chartbox/Chartbox';
 import House1 from '../../images/house1.jpeg';
+
 import Actualchart from '../chartbox/Actualchart';
 import {Link} from "react-router-dom";
 
@@ -16,7 +17,7 @@ export default function Propertyitem (props){
          <>
            
          <div className="propertyitemContainer">
-         <img src={House1} alt="property picture" className="houselistpic" />
+         <img src={props.imageLink} alt="property picture" className="houselistpic" />
          
          <div className="chartForList">
          <Actualchart /> {/*this component needs a container around it*/}

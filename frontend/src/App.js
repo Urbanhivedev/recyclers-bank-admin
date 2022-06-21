@@ -3,7 +3,10 @@ import Topbar from "./components/topbar/Topbar";
 
 import Homepage from "./pages/homepage/Homepage";
 import Bookings from "./pages/bookings/Bookings";
-import Propertylist from "./pages/propertylist/Propertylist";
+
+import OffplanPropertylist from "./pages/offplanpropertylist/OffplanPropertylist";
+import BuiltPropertylist from "./pages/builtpropertylist/BuiltPropertylist";
+
 import Propertyview from "./pages/propertyview/Propertyview";
 import Usertable from "./pages/usertable/Usertable";
 import Propertytable from "./pages/propertytable/Propertytable";
@@ -28,7 +31,9 @@ function App() {
       <Sidebar/>
          <Routes>
            <Route  path="/" element={<Homepage/>} />
-           <Route  path="/properties" element={<Propertylist/>} />
+           <Route  path="/properties/offplan" element={<OffplanPropertylist/>} />
+           <Route  path="/properties/built" element={<BuiltPropertylist/>} />
+           
            
            <Route  path= "/bookings" element ={<Bookings/>} />
            <Route  path= "/propertyview" element ={<Propertyview/>} />
