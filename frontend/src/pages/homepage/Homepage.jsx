@@ -9,6 +9,13 @@ import Chartbox from  "../../components/chartbox/Chartbox"
 import Messagebox from  "../../components/messagebox/Messagebox"
 import Propertyitem from  "../../components/propertyitem/Propertyitem"
 
+/** just temporary pics */
+import House1 from '../../images/house1.jpeg';
+import House2 from '../../images/house2.jpeg';
+import House3 from '../../images/house3.jpg';
+import House4 from '../../images/house4.jpeg';
+/** just temporary pics end */
+
 import Searchandfilter from '../../components/searchandfilter/Searchandfilter';
 
 
@@ -26,11 +33,11 @@ export default function Homepage() {
    const [searchDone,setSearchDone] = useState(false);
    const [filteredAddresses,setFilteredAddresses] = useState([]);
    
-   const [addressList,setAddressList] = useState([]);
+   /*const [addressList,setAddressList] = useState([]);*/
    
    const filterRef = useRef();
   
-  /* const addressList = [ "234 ABBEY ROAD HOUSTON, TEXAS" , "19 WEST LANE HOUSTON,TEXAS" , "40 DRISCOLL STREET HOUSTON,TEXAS" ]*/
+   const addressList = [ "234 ABBEY ROAD HOUSTON, TEXAS" , "19 WEST LANE HOUSTON,TEXAS" , "40 DRISCOLL STREET HOUSTON,TEXAS" ]
 
  
    useEffect(()=>{
@@ -39,7 +46,7 @@ export default function Homepage() {
       
      const {data} = await axios.get('/api/properties') //{data} is object destructuring from what we get back from axios , i totally forgot about object destructuring
     
-      setAddressList(data)
+      /*setAddressList(data)*/
 
     }
 
@@ -156,7 +163,7 @@ export default function Homepage() {
   
           return (
               
-               <Propertyitem key={i} address={item}/> 
+               <Propertyitem imageLink ={House1} key={i} address={item} /> 
               
           )
          
@@ -169,7 +176,7 @@ export default function Homepage() {
   
        return (
             <div >
-            <Propertyitem key={i} address={item}/> 
+            <Propertyitem imageLink ={House1} key={i} address={item}/> 
             </div>
        )
 
