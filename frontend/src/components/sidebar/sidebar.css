@@ -20,7 +20,7 @@ a {
 }
 
 .sidebarWrapper {
-     margin-top: 180px;
+     margin-top: 100px;
     padding:20px;
     color:white;
     background-color: rgb(30, 121, 3);
@@ -29,9 +29,37 @@ a {
 .sidebarMenu {
     margin-bottom: 20px;
    
-    
-
 }
+
+
+.buttonSidebar {
+
+   
+
+    padding:10px 10px 10px 10px;
+    width: 140px;
+    border-radius: 5px;
+    background-color: rgb(35, 138, 4);
+    color:white;
+    font-size: large;
+    font-weight: bold;
+    cursor:pointer;
+
+    margin-left:10px;
+    margin-top:100px;
+ 
+}
+
+.buttonSidebar:hover{
+    background-color: rgb(87, 86, 86);
+}
+
+.iconNB {
+   background: inherit;
+}
+
+
+
 
 .sidebarTitle {
     /*font-size:13px;*/

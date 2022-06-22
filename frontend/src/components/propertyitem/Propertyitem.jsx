@@ -29,13 +29,13 @@ export default function Propertyitem (props){
            <div className="houseStats">
           
             <div className="percentAppreciation">
-                10%
+                {props.percentage}
             </div>
 
             <div className="priceAndView">
                
               <div className="price">
-                $36750
+                {props.purchasePrice}
               </div>
 
               <Link to={"/propertyview"}>

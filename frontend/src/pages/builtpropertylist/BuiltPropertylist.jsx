@@ -29,7 +29,7 @@ export default function BuiltPropertylist() {   /*to fetch info from a url . it 
       
           const {data} = await axios.get('/api/properties') //{data} is object destructuring from what we get back from axios , i totally forgot about object destructuring
          
-           setAddressList(data)
+           setAddressList(data.properties)
      
          }
      
@@ -50,48 +50,18 @@ export default function BuiltPropertylist() {   /*to fetch info from a url . it 
          {/* the property list below will be a forEach , and i will load as many
           components as the database warrants me to, but for now, I will just hard code like 5 items */}
            
-        <div className="backgroundColor" >
-             <Propertyitem imageLink ={House1}/> 
-        </div>
-
-        <div className="backgroundColor" >
-             <Propertyitem imageLink ={House2} /> 
-        </div>
-
-        <div className="backgroundColor" >
-             <Propertyitem imageLink ={House3}/> 
-        </div>
-
-        <div className="backgroundColor">
-             <Propertyitem imageLink ={House4}/> 
-        </div>
-
-        {/*filteredAddresses.length === 0 ? 
-        
-        addressList.map((item,i)=>{
+{   addressList.map((item,i)=>{
   
-          return (
-              
-               <Propertyitem key={i} address={item}/> 
-              
-          )
-         
-   
-             })
+  return (
+      
+       <Propertyitem imageLink ={item.image} key={i} address={item.address}  purchasePrice={item.purchasePrice} percentage={item.percentage}/> 
+      
+  )
+ 
 
-        :
+     })
+        }
         
-        filteredAddresses.map((item,i)=>{
-  
-       return (
-            <div >
-            <Propertyitem key={i} address={item}/> 
-            </div>
-       )
-
-          })
-        */}
-         
           
       </div> {/* propertyListcontainer END */}
         

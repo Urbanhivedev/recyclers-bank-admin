@@ -97,12 +97,14 @@ const getProperties = asyncHandler(async (req,res)=>{
    // I am instructing my getProducts controller to tune it's search, based on if there's a vendor name or not 
    
   count = /* Product.countDocuments({...keyword,countInStock:{$gt:0}}),*/ properties.length
-  propertylist =  (array, pageSize, pageNumber) => {
-    return array.slice((pageNumber - 1) * pageSize, pageNumber * pageSize);
+  propertylist = (properties, pageSize, pageNumber) => {
+    return properties.slice((pageNumber - 1) * pageSize, pageNumber * pageSize);
   }
   
+ /* const propertylists = propertylist()*/
   
-    res.json({propertylist,page,pages:Math.ceil(count/pageSize)})
+  
+    res.json({properties:properties[0].data, page,pages:Math.ceil(count/pageSize)})
   })
 
   export {getProperties}

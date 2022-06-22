@@ -8,6 +8,8 @@ import "./homepage.css";
 import Chartbox from  "../../components/chartbox/Chartbox"
 import Messagebox from  "../../components/messagebox/Messagebox"
 import Propertyitem from  "../../components/propertyitem/Propertyitem"
+import Paginate from '../../components/Paginate';
+import {Link} from "react-router-dom";
 
 /** just temporary pics */
 import House1 from '../../images/house1.jpeg';
@@ -33,20 +35,23 @@ export default function Homepage() {
    const [searchDone,setSearchDone] = useState(false);
    const [filteredAddresses,setFilteredAddresses] = useState([]);
    
-   /*const [addressList,setAddressList] = useState([]);*/
+  
+   const [pages,setPages] = useState(2);
+   const [page,setPage] = useState(1);
    
    const filterRef = useRef();
   
-   const addressList = [ "234 ABBEY ROAD HOUSTON, TEXAS" , "19 WEST LANE HOUSTON,TEXAS" , "40 DRISCOLL STREET HOUSTON,TEXAS" ]
-
+   /*const addressList = [ "234 ABBEY ROAD HOUSTON, TEXAS" , "19 WEST LANE HOUSTON,TEXAS" , "40 DRISCOLL STREET HOUSTON,TEXAS" ]*/
+   const [addressList,setAddressList] = useState([]);
  
    useEffect(()=>{
 
      const fetchProperties = async() => {
       
      const {data} = await axios.get('/api/properties') //{data} is object destructuring from what we get back from axios , i totally forgot about object destructuring
-    
-      /*setAddressList(data)*/
+     console.log(data)
+     console.log(data.properties)
+      setAddressList(data.properties)
 
     }
 
@@ -163,7 +168,7 @@ export default function Homepage() {
   
           return (
               
-               <Propertyitem imageLink ={House2} key={i} address={item} /> 
+               <Propertyitem imageLink ={item.image} key={i} address={item.address}  purchasePrice={item.purchasePrice} percentage={item.percentage}/> 
               
           )
          
@@ -176,7 +181,7 @@ export default function Homepage() {
   
        return (
             <div >
-            <Propertyitem imageLink ={House1} key={i} address={item}/> 
+            <Propertyitem imageLink ={item.image} key={i} address={item.address} purchasePrice={item.purchasePrice} percentage={item.percentage}/> 
             </div>
        )
 
@@ -187,6 +192,7 @@ export default function Homepage() {
 
         </div> {/*property list end */}
          
+       
 
         <div className="pagination backgroundColor">
       <button className="btn backgroundColor">
@@ -206,19 +212,23 @@ export default function Homepage() {
         </svg>
       </button>
       <div className="pages backgroundColor">
-        <a className="page active">1</a>
-        <a className="page">2</a>
-        <a className="page ">3</a>
-        <a className="page">4</a>
-        <a className="page">5</a>
-        <a className="page">6</a>
-        <a className="page">...</a>
-        <a className="page">23</a>
+       
+      {[...Array(pages).keys()].map(x => (
+             <Link key={x+1} to={ `properties/page/${x+1}`} >
+
+          <a className={`page ${x+1===page && "active"}`}>1</a>
+
+             </Link>
+           ))}
+       
+
+
+
       </div>
       <button className="btn backgroundColor">
         <svg
           xmlns="http://www.w3.org/2000/svg"
-          class="btn--icon backgroundColor"
+          className="btn--icon backgroundColor"
           fill="none"
           viewBox="0 0 24 24"
           stroke="currentColor"
@@ -234,7 +244,7 @@ export default function Homepage() {
     </div>
 
           
-      </div>
+      </div> {/*home container ending */}
         
       </> 
       

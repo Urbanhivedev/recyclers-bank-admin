@@ -5,9 +5,10 @@ import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
 import AddIcon from '@mui/icons-material/Add';
 import DoneIcon from '@mui/icons-material/Done';
+import {Table,Button} from 'react-bootstrap'
 
 import {LinkContainer} from 'react-router-bootstrap'
-import {Table,Button} from 'react-bootstrap'
+
 
 import './propertytable.css'
 

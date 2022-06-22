@@ -18,26 +18,27 @@ export default function OffplanPropertyList() {   /*to fetch info from a url . i
    
    let url; /*the link to get the rsources (or the backend info) */
    const [allVideos,setAllVideos] = useState(''); /*this is where database data will reside */ 
-    const [addressList,setAddressList] = useState([]);
-   
+   const [addressList,setAddressList] = useState([]);
+   const [tempPics , setTempPics] =  useState([Offplan1,Offplan2,Offplan3,Offplan4,Offplan5]);
   
   
 
 
-  useEffect(()=>{
-
-     const fetchProperties = async() => {
+   useEffect(()=>{
+ 
+      const fetchProperties = async() => {
+       
+           const {data} = await axios.get('/api/properties') //{data} is object destructuring from what we get back from axios , i totally forgot about object destructuring
+          
+            setAddressList(data.properties)
       
-          const {data} = await axios.get('/api/properties') //{data} is object destructuring from what we get back from axios , i totally forgot about object destructuring
-         
-           setAddressList(data)
-     
-         }
-     
-         fetchProperties()
-
-  },[url])
-  
+          }
+      
+          fetchProperties()
+          console.log(addressList)
+ 
+   },[url])
+   
   
   
   
@@ -48,50 +49,22 @@ export default function OffplanPropertyList() {   /*to fetch info from a url . i
        
        <Searchandfilter className="searchComponent"/> 
 
-         {/* the property list below will be a forEach , and i will load as many
-          components as the database warrants me to, but for now, I will just hard code like 5 items */}
-           
-        <div className="backgroundColor" >
-             <Propertyitem imageLink ={Offplan1}/> 
-        </div>
-
-        <div className="backgroundColor" >
-             <Propertyitem imageLink ={Offplan2}/> 
-        </div>
-
-        <div className="backgroundColor" >
-             <Propertyitem imageLink ={Offplan3}/> 
-        </div>
-
-        <div className="backgroundColor">
-             <Propertyitem imageLink ={Offplan4}/> 
-        </div>
-
-        {/*filteredAddresses.length === 0 ? 
-        
-        addressList.map((item,i)=>{
+         {/* the property list below will be from the off-plan properites,when that distinguishment is made,
+          but for now, I am loading all properties and using my personal hardcoded pics */}
+       
+                   
+{   addressList.map((item,i)=>{
   
-          return (
-              
-               <Propertyitem key={i} address={item}/> 
-              
-          )
-         
-   
-             })
+  return (
+      
+       <Propertyitem imageLink ={tempPics[i]} key={i} address={item.address}  purchasePrice={item.purchasePrice} percentage={item.percentage}/> 
+      
+  )
+ 
 
-        :
+     })
+        }
         
-        filteredAddresses.map((item,i)=>{
-  
-       return (
-            <div >
-            <Propertyitem key={i} address={item}/> 
-            </div>
-       )
-
-          })
-        */}
          
           
       </div> {/* propertyListcontainer END */}
