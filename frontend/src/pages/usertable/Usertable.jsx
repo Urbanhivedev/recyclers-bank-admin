@@ -4,6 +4,7 @@ import Grid from '@mui/material/Grid';
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
 import AddIcon from '@mui/icons-material/Add';
+import Paginate from '../../components/paginate/Paginate';
 
 import {LinkContainer} from 'react-router-bootstrap'
 import {Table,Button} from 'react-bootstrap'
@@ -20,7 +21,8 @@ import axios from 'axios'
 export default function Usertable() {
    
    
-   const videoRef = useRef();
+  const [pages,setPages] = useState(1);
+   const [page,setPage] = useState(1);
   
 
 
@@ -104,7 +106,7 @@ export default function Usertable() {
               <td className='td'>    
               <Link to={`/admin/user/${user._id}/edit`}>
                 <Button className = "buttonStyle" >
-                  <EditIcon className = "iconNB"/> Edit
+                  <EditIcon className = "iconNB"/>
                 </Button>
                </Link>
             </td>
@@ -114,7 +116,7 @@ export default function Usertable() {
                
 
                <Button className = "buttonStyle" >
-               <DeleteIcon className = "iconNB"/> Delete
+               <DeleteIcon className = "iconNB"/>
                </Button>
              </td>
 
@@ -127,6 +129,7 @@ export default function Usertable() {
           
       </div>
         
+      <Paginate page={page} pages={pages}/>
       </> 
       
     )

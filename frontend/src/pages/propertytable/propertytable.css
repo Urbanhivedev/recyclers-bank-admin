@@ -36,11 +36,12 @@
     text-align: left;
     padding: 20px;
     background-color: #ffffff;
+    border-top:none ;
+    border-left:none;
+    border-right:none;
   }
   
-  .tr:nth-child(even) {
-    background-color: #dddddd;
-  }
+  
 
   /*button styles*/
 

@@ -4,6 +4,7 @@ import "./propertylist.css";
 import Chartbox from  "../../components/chartbox/Chartbox"
 import Messagebox from  "../../components/messagebox/Messagebox"
 import Propertyitem from  "../../components/propertyitem/Propertyitem"
+import Paginate from '../../components/paginate/Paginate';
 /*import {Link} from "react-router-dom";*/
 import Searchandfilter from '../../components/searchandfilter/Searchandfilter';
 import axios from 'axios'  
@@ -18,26 +19,32 @@ export default function OffplanPropertyList() {   /*to fetch info from a url . i
    
    let url; /*the link to get the rsources (or the backend info) */
    const [allVideos,setAllVideos] = useState(''); /*this is where database data will reside */ 
-   const [addressList,setAddressList] = useState([]);
+   
    const [tempPics , setTempPics] =  useState([Offplan1,Offplan2,Offplan3,Offplan4,Offplan5]);
   
   
+   const [pages,setPages] = useState(1);
+   const [page,setPage] = useState(1);
+   const [addressList,setAddressList] = useState([]);
 
 
    useEffect(()=>{
- 
-      const fetchProperties = async() => {
-       
-           const {data} = await axios.get('/api/properties') //{data} is object destructuring from what we get back from axios , i totally forgot about object destructuring
-          
-            setAddressList(data.properties)
-      
-          }
-      
-          fetchProperties()
-          console.log(addressList)
- 
-   },[url])
+
+    const fetchProperties = async() => {
+     
+    const {data} = await axios.get('/api/properties') //{data} is object destructuring from what we get back from axios , i totally forgot about object destructuring
+    console.log(data)
+    console.log(data.properties)
+     setAddressList(data.properties)
+     setPage(data.page)
+     setPages(data.pages)
+
+   }
+
+   fetchProperties()
+
+/*no need to put any dependencies in use effect just yet, I want the fetch to happen only when the page is loaded */
+ },[])
    
   
   
@@ -65,7 +72,7 @@ export default function OffplanPropertyList() {   /*to fetch info from a url . i
      })
         }
         
-         
+        <Paginate page={page} pages={pages}/> 
           
       </div> {/* propertyListcontainer END */}
         

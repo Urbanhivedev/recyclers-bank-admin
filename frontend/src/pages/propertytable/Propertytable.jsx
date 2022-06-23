@@ -4,6 +4,7 @@ import Grid from '@mui/material/Grid';
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
 import AddIcon from '@mui/icons-material/Add';
+import Paginate from '../../components/paginate/Paginate';
 import DoneIcon from '@mui/icons-material/Done';
 import {Table,Button} from 'react-bootstrap'
 
@@ -19,18 +20,34 @@ import axios from 'axios'
 
 
 
+
+
 export default function Propertytable() {
    
    
-   const videoRef = useRef();
+  const [pages,setPages] = useState(1);
+   const [page,setPage] = useState(1);
+   const [addressList,setAddressList] = useState([]);
   
 
 
-  useEffect(()=>{
+   useEffect(()=>{
 
-    
+    const fetchProperties = async() => {
+     
+    const {data} = await axios.get('/api/properties') //{data} is object destructuring from what we get back from axios , i totally forgot about object destructuring
+    console.log(data)
+    console.log(data.properties)
+     setAddressList(data.properties)
+     setPage(data.page)
+     setPages(data.pages)
 
-  },[])
+   }
+
+   fetchProperties()
+
+/*no need to put any dependencies in use effect just yet, I want the fetch to happen only when the page is loaded */
+ },[])
   
   const properties = [{
     _id:"1",
@@ -119,7 +136,7 @@ export default function Propertytable() {
               <td className='td'>    
               <Link to={`/admin/user/${property._id}/edit`}>
                 <Button className = "buttonStyle">
-                  <EditIcon className = "iconNB"/> Edit
+                  <EditIcon className = "iconNB"/> 
                 </Button>
                </Link>
             </td>
@@ -129,7 +146,7 @@ export default function Propertytable() {
                
 
                <Button className = "buttonStyle" >
-               <DeleteIcon className = "iconNB"/> Delete
+               <DeleteIcon className = "iconNB"/> 
                </Button>
              </td>
 
@@ -141,6 +158,8 @@ export default function Propertytable() {
         
           
       </div>
+
+      <Paginate page={page} pages={pages}/>
         
       </> 
       

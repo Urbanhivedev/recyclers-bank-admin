@@ -45,7 +45,7 @@ getDocs(colRef)
 
      properties.push({...doc.data(), id:doc.id})
      }) 
-      console.log(properties)
+      /*console.log(properties)*/
 
  })
  
@@ -58,7 +58,7 @@ getDocs(colRef)
 
   messages.push({...doc.data(), id:doc.id})
   }) 
-   console.log(messages)
+   /*console.log(messages)*/
 
 } ) 
 
@@ -96,15 +96,24 @@ const getProperties = asyncHandler(async (req,res)=>{
    
    // I am instructing my getProducts controller to tune it's search, based on if there's a vendor name or not 
    
-  count = /* Product.countDocuments({...keyword,countInStock:{$gt:0}}),*/ properties.length
-  propertylist = (properties, pageSize, pageNumber) => {
-    return properties.slice((pageNumber - 1) * pageSize, pageNumber * pageSize);
+  count = /* Product.countDocuments({...keyword,countInStock:{$gt:0}}),*/ properties[0].data.length
+  propertylist = (array, pageSize, pageNumber) => {
+    
+    console.log(properties[0].data.length)
+    return array.slice((pageNumber - 1) * pageSize, pageNumber * pageSize);
+  
   }
   
- /* const propertylists = propertylist()*/
+  
+
+
+  const propertylists = propertylist(properties[0].data,pageSize,page)
   
   
-    res.json({properties:properties[0].data, page,pages:Math.ceil(count/pageSize)})
+
+
+  
+    res.json({properties:propertylists, page,pages:Math.ceil(count/pageSize)})
   })
 
   export {getProperties}

@@ -8,7 +8,7 @@ import "./homepage.css";
 import Chartbox from  "../../components/chartbox/Chartbox"
 import Messagebox from  "../../components/messagebox/Messagebox"
 import Propertyitem from  "../../components/propertyitem/Propertyitem"
-import Paginate from '../../components/Paginate';
+import Paginate from '../../components/paginate/Paginate';
 import {Link} from "react-router-dom";
 
 /** just temporary pics */
@@ -36,13 +36,14 @@ export default function Homepage() {
    const [filteredAddresses,setFilteredAddresses] = useState([]);
    
   
-   const [pages,setPages] = useState(2);
+   const [pages,setPages] = useState(1);
    const [page,setPage] = useState(1);
+   const [addressList,setAddressList] = useState([]);
    
    const filterRef = useRef();
   
    /*const addressList = [ "234 ABBEY ROAD HOUSTON, TEXAS" , "19 WEST LANE HOUSTON,TEXAS" , "40 DRISCOLL STREET HOUSTON,TEXAS" ]*/
-   const [addressList,setAddressList] = useState([]);
+   
  
    useEffect(()=>{
 
@@ -52,6 +53,8 @@ export default function Homepage() {
      console.log(data)
      console.log(data.properties)
       setAddressList(data.properties)
+      setPage(data.page)
+      setPages(data.pages)
 
     }
 
@@ -193,55 +196,8 @@ export default function Homepage() {
         </div> {/*property list end */}
          
        
-
-        <div className="pagination backgroundColor">
-      <button className="btn backgroundColor">
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          className="btn--icon backgroundColor"
-          fill="none"
-          viewBox="0 0 24 24"
-          stroke="currentColor"
-          stroke-width="2"
-        >
-          <path
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            d="M15 19l-7-7 7-7"
-          />
-        </svg>
-      </button>
-      <div className="pages backgroundColor">
-       
-      {[...Array(pages).keys()].map(x => (
-             <Link key={x+1} to={ `properties/page/${x+1}`} >
-
-          <a className={`page ${x+1===page && "active"}`}>1</a>
-
-             </Link>
-           ))}
-       
-
-
-
-      </div>
-      <button className="btn backgroundColor">
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          className="btn--icon backgroundColor"
-          fill="none"
-          viewBox="0 0 24 24"
-          stroke="currentColor"
-          stroke-width="2"
-        >
-          <path
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            d="M9 5l7 7-7 7"
-          />
-        </svg>
-      </button>
-    </div>
+    <Paginate page={page} pages={pages}/>
+      
 
           
       </div> {/*home container ending */}
