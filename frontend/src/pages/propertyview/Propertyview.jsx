@@ -9,24 +9,37 @@ import House1 from '../../images/house1.jpeg';
 import {Link} from "react-router-dom";
 import Searchandfilter from '../../components/searchandfilter/Searchandfilter';
 import axios from 'axios'  
+import { useParams } from 'react-router-dom';
 
 
 
 
-export default function PropertyView() {
+function PropertyView() {
    
    let url; /*the link to get the rsources (or the backend info) */
-   const [allVideos,setAllVideos] = useState(''); /*this is where database data will reside */ 
+   const [property,setProperty] = useState({}); /*this is where the  database information will reside */ 
    
-   const videoRef = useRef();
+   const { address } = useParams();
+  
   
 
 
-  useEffect(()=>{
+   useEffect(()=>{
 
+    const fetchProperty = async() => {
+     
+    const {data} = await axios.get(`/api/properties/${address}`) 
+   
     
+     setProperty(data.property[0]) /*i AM GOING OFF THE ASSUMPTION THAT I ONLY GET ONE VALUE , CUZ ADDRESSES ARE UNIQUE AFTER ALL */
+    
+    
+   }
 
-  },[url])
+   fetchProperty()
+
+
+ },[])
   
   
   
@@ -42,14 +55,14 @@ export default function PropertyView() {
         <div className="imageAndDetails">   
         
          <div className="subjectHouseContainer">
-           <img src={House1} alt="property picture" className="subjectHousePic" />  
+           <img src={property.image} alt="property picture" className="subjectHousePic" />  
          </div>
          
          
          <div className="propertyPricingDetails">
-           <div className='moneyValue'>$48,150</div>
+           <div className='moneyValue'>{property.amountLeft}</div>
            <br/> {/*you can  use css-margin instead of this if you like */}
-           <div className="percentageValue">15%</div>
+           <div className="percentageValue">{property.percentage}</div>
          </div>
 
         </div>
@@ -77,10 +90,10 @@ export default function PropertyView() {
                <br />
 
                <ul className="featuresList">
-                 <li className ="fontAdjust">BUILT:<strong>2018 </strong></li>
-                 <li className ="fontAdjust">PURPOSE: <strong>RENT </strong></li>
-                 <li className ="fontAdjust">PURCHASE PRICE: <strong>$325,000</strong> </li>
-                 <li className ="fontAdjust">CURRENT PRICE: <strong>$425,000 </strong></li>
+                 <li className ="fontAdjust">PURCHASE DATE:<strong>{property.purchaseDate}</strong></li>
+                 <li className ="fontAdjust">PURPOSE: <strong>{property.type} </strong></li>
+                 <li className ="fontAdjust">PURCHASE PRICE: <strong>{property.purchasePrice}</strong> </li>
+                 <li className ="fontAdjust">CURRENT PRICE: <strong>{property.purchasePrice} </strong></li>
                </ul>
              </div>
             
@@ -95,7 +108,7 @@ export default function PropertyView() {
         
 
           <div className= "purchaseDate">
-          <h3> PURCHASED ON 02/11/2021 </h3>
+          <h3> PURCHASED ON {property.purchaseDate} </h3>
           </div>
 
             
@@ -109,3 +122,5 @@ export default function PropertyView() {
       
     )
 }
+
+export default PropertyView

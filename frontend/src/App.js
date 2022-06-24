@@ -36,9 +36,13 @@ function App() {
            
            
            <Route  path= "/bookings" element ={<Bookings/>} />
-           <Route  path= "/propertyview" element ={<Propertyview/>} />
+           
+           <Route  path= "/propertyview/:address" element ={<Propertyview/>} />
+
            <Route  path= "/admin/userlist" element ={<Usertable/>} />
            <Route  path= "/admin/propertylist" element ={<Propertytable/>} />
+
+           
          </Routes>
        </Router>
        </div> 

@@ -45,7 +45,7 @@ getDocs(colRef)
 
      properties.push({...doc.data(), id:doc.id})
      }) 
-      /*console.log(properties)*/
+      /*console.log(properties[0].data)*/
 
  })
  
@@ -99,7 +99,7 @@ const getProperties = asyncHandler(async (req,res)=>{
   count = /* Product.countDocuments({...keyword,countInStock:{$gt:0}}),*/ properties[0].data.length
   propertylist = (array, pageSize, pageNumber) => {
     
-    console.log(properties[0].data.length)
+    
     return array.slice((pageNumber - 1) * pageSize, pageNumber * pageSize);
   
   }
@@ -116,4 +116,34 @@ const getProperties = asyncHandler(async (req,res)=>{
     res.json({properties:propertylists, page,pages:Math.ceil(count/pageSize)})
   })
 
-  export {getProperties}
+
+
+  const getPropertyByAddress = asyncHandler(async(req,res)=>{
+    res.header("Access-Control-Allow-Origin","*")
+     /*const searchAddress = req.params.address
+     console.log(searchAddress)
+
+    
+const docRef = doc(dbtest,"estate", "collection")
+
+getDoc(docRef)
+ .then((doc) => {
+    
+     doc.filter((item)=>( item.address === searchAddress)).forEach((doc) => {
+   
+        property.push(doc)
+  
+})
+       
+ } )*/
+ const property = [] 
+
+
+  property.push( ...properties[0].data.filter((p) => p.address === req.params.address) )
+    
+  console.log(property)
+    res.json({property})
+  })
+
+
+  export {getProperties,getPropertyByAddress}

@@ -38,7 +38,7 @@ export default function Propertyitem (props){
                 {props.purchasePrice}
               </div>
 
-              <Link to={"/propertyview"}>
+              <Link to={`/propertyview/${props.address}`}>
               <button  type="button" className="view">
                 View
               </button>
