@@ -158,9 +158,9 @@ getDoc(docRef)
     const type = req.body.type
    
 console.log(req.body)
-res.json({submitted:true})
+
     
-   /*updateDoc(docRef, {
+   /updateDoc(docRef, {
     data:[...properties[0].data,{
       address:propertyAddress,
       amountLeft:"",
@@ -186,7 +186,7 @@ res.json({submitted:true})
 
      res.json({submitted:true})
 
-   )*/
+   )
 
 
 
