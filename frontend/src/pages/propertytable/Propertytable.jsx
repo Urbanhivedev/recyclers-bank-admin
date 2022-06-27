@@ -97,10 +97,13 @@ export default function Propertytable() {
         <p className ="backgroundColor" > NOTE: Take Caution not to delete property by accident </p>
       </div>
 
+
          <div className ="backgroundColor">
+              <Link to={'/admin/addproperty'} >
                 <Button  className = "buttonStyle">
                   <AddIcon className = "iconNB"/> Add Property
                 </Button>
+             </Link>
 
          </div>
 

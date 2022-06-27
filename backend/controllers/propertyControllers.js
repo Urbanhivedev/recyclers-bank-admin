@@ -4,7 +4,7 @@ import asyncHandler from 'express-async-handler'
 //const Product = require('../models/productModel.js') ES5 VERSION
 //const asyncHandler = require('express-async-handler') ES5 VERSION
 
-import { getFirestore, collection, where , query ,getDocs ,addDoc, deleteDoc ,doc, getDoc } from 'firebase/firestore';
+import { getFirestore, collection, where , query ,getDocs ,addDoc, deleteDoc ,doc, getDoc ,updateDoc} from 'firebase/firestore';
 import { initializeApp } from 'firebase/app'
 
 import dotenv from 'dotenv'
@@ -30,6 +30,7 @@ initializeApp(firebaseConfig)
 const dbtest = getFirestore()
 
 const colRef = collection(dbtest , "estate")
+const docRef = doc(dbtest, "estate","collection")
 
 /**the arrays i will send in my fetch requests */
 let properties = []
@@ -94,9 +95,9 @@ const getProperties = asyncHandler(async (req,res)=>{
    
    }:{}
    
-   // I am instructing my getProducts controller to tune it's search, based on if there's a vendor name or not 
    
-  count = /* Product.countDocuments({...keyword,countInStock:{$gt:0}}),*/ properties[0].data.length
+   
+  count = properties[0].data.length
   propertylist = (array, pageSize, pageNumber) => {
     
     
@@ -146,4 +147,52 @@ getDoc(docRef)
   })
 
 
-  export {getProperties,getPropertyByAddress}
+  const addNewProperty = asyncHandler(async(req,res)=>{
+    res.header("Access-Control-Allow-Origin","*")
+    
+    const propertyAddress = req.body.propertyAddress
+    const purchasePrice = req.body.purchasePrice
+    const purchaseDate = req.body.purchaseDate
+    const yearBuilt = req.body.yearBuilt
+    const percentage = req.body.percentage
+    const type = req.body.type
+   
+console.log(req.body)
+res.json({submitted:true})
+    
+   /*updateDoc(docRef, {
+    data:[...properties[0].data,{
+      address:propertyAddress,
+      amountLeft:"",
+      earn:[""],
+      image:"https://firebasestorage.googleapis.com/v0/b/catex-54325.appspot.com/o/image%2FHouse1.jpeg?alt=media&token=1532e522-f03d-42da-a9c5-180348572d19",
+      images:[""],
+      monthlyIncome:"",
+      monthlyReturn:"",
+      percentage:percentage,
+      percentageReturn:"",
+      purchaseDate:purchaseDate,
+      purchasePrice:purchasePrice,
+      totalReturn:"",
+      type:type,
+      yearBuilt:yearBuilt
+
+
+
+
+    }]
+
+   }).then(
+
+     res.json({submitted:true})
+
+   )*/
+
+
+
+  })
+
+
+
+
+  export {getProperties,getPropertyByAddress,addNewProperty}
