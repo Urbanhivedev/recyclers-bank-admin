@@ -5,7 +5,7 @@ import Chartbox from  "../../components/chartbox/Chartbox"
 import Messagebox from  "../../components/messagebox/Messagebox"
 import Propertyitem from  "../../components/propertyitem/Propertyitem"
 import Paginate from '../../components/paginate/Paginate';
-/*import {Link} from "react-router-dom";*/
+import {useNavigate} from "react-router-dom";
 import Searchandfilter from '../../components/searchandfilter/Searchandfilter';
 import axios from 'axios'  
 
@@ -16,9 +16,20 @@ import Offplan4 from '../../images/offplan-4.jpg';
 import Offplan5 from '../../images/offplan-5.jpg';
 
 export default function OffplanPropertyList() {   /*to fetch info from a url . it is props.match ,cuz match is inside props by default */
+  /*I am pushing people to login page if they dont have user info details, i.e they are not in */
+  
+  const navigate = useNavigate()
+  const [userInfo,setUserInfo]  = useState(JSON.parse(window.sessionStorage.getItem('userInfo'))) 
    
-   let url; /*the link to get the rsources (or the backend info) */
-   const [allVideos,setAllVideos] = useState(''); /*this is where database data will reside */ 
+     useEffect(()=>{
+  
+      if(userInfo === null){
+        navigate('/')
+      }
+  
+    },[userInfo])
+
+    /*I am pushing people to login page if they dont have user info details, i.e they are not in END */
    
    const [tempPics , setTempPics] =  useState([Offplan1,Offplan2,Offplan3,Offplan4,Offplan5]);
   

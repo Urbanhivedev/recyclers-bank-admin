@@ -11,7 +11,7 @@ import {Table,Button} from 'react-bootstrap'
 
 import './usertable.css'
 
-import {Link} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 
 import axios from 'axios'  
 
@@ -20,6 +20,20 @@ import axios from 'axios'
 
 export default function Usertable() {
    
+
+  /*I am pushing people to login page if they dont have user info details, i.e they are not in */
+  const navigate = useNavigate()
+  const [userInfo,setUserInfo]  = useState(JSON.parse(window.sessionStorage.getItem('userInfo'))) 
+   
+     useEffect(()=>{
+  
+      if(userInfo === null){
+        navigate('/')
+      }
+  
+    },[userInfo])
+
+    /*I am pushing people to login page if they dont have user info details, i.e they are not in END */
    
   const [pages,setPages] = useState(1);
    const [page,setPage] = useState(1);

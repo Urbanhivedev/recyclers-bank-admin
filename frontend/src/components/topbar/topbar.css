@@ -85,7 +85,11 @@
 
  }
 
-
+.loggedUser {
+    background-color: inherit;
+    color:white;
+    margin-right: 20px;
+}
 
 
 

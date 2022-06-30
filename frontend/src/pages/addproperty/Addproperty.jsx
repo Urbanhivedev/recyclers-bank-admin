@@ -1,5 +1,5 @@
 import React,{useEffect, useState, useRef} from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams,useNavigate } from 'react-router-dom';
 import Grid from '@mui/material/Grid';
 import DoneIcon from '@mui/icons-material/Done';
 import ReplayIcon from '@mui/icons-material/Replay';
@@ -19,6 +19,25 @@ import axios from 'axios'
 
 export default function AddProperty() {
    
+/*I am pushing people to login page if they dont have user info details, i.e they are not in */
+  const navigate = useNavigate()
+  const [userInfo,setUserInfo]  = useState(JSON.parse(window.sessionStorage.getItem('userInfo'))) 
+   
+     useEffect(()=>{
+  
+      if(userInfo === null){
+        navigate('/')
+      }
+  
+    },[userInfo])
+
+    /*I am pushing people to login page if they dont have user info details, i.e they are not in END */
+
+
+
+
+
+
   
    const [property,setProperty] = useState({}); /*this is where the  database information will reside */ 
 

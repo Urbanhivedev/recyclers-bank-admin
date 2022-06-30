@@ -1,4 +1,5 @@
 import React,{useEffect, useState, useRef} from 'react';
+import {useNavigate} from 'react-router-dom';
 import Grid from '@mui/material/Grid';
 import "./propertylist.css";
 import Chartbox from  "../../components/chartbox/Chartbox"
@@ -16,7 +17,19 @@ import axios from 'axios'
 
 export default function BuiltPropertylist() {   /*to fetch info from a url . it is props.match ,cuz match is inside props by default */
    
-   let url; /*the link to get the resources (or the backend info) */
+   /*I am pushing people to login page if they dont have user info details, i.e they are not in */
+  const navigate = useNavigate()
+  const [userInfo,setUserInfo]  = useState(JSON.parse(window.sessionStorage.getItem('userInfo'))) 
+   
+     useEffect(()=>{
+  
+      if(userInfo === null){
+        navigate('/')
+      }
+  
+    },[userInfo])
+
+    /*I am pushing people to login page if they dont have user info details, i.e they are not in END */
   
    const [pages,setPages] = useState(1);
    const [page,setPage] = useState(1);

@@ -9,14 +9,27 @@ import House1 from '../../images/house1.jpeg';
 import {Link} from "react-router-dom";
 import Searchandfilter from '../../components/searchandfilter/Searchandfilter';
 import axios from 'axios'  
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 
 
 
 
 function PropertyView() {
    
-   let url; /*the link to get the rsources (or the backend info) */
+  /*I am pushing people to login page if they dont have user info details, i.e they are not in */
+  const navigate = useNavigate()
+  const [userInfo,setUserInfo]  = useState(JSON.parse(window.sessionStorage.getItem('userInfo'))) 
+   
+     useEffect(()=>{
+  
+      if(userInfo === null){
+        navigate('/')
+      }
+  
+    },[userInfo])
+
+    /*I am pushing people to login page if they dont have user info details, i.e they are not in END */
+
    const [property,setProperty] = useState({}); /*this is where the  database information will reside */ 
    
    const { address } = useParams();

@@ -2,7 +2,7 @@ import React,{useEffect, useState, useRef} from 'react';
 
 import "./registerpage.css";
 
-import {Link} from "react-router-dom";
+import {Link,useNavigate} from "react-router-dom";
 
 import axios from 'axios'  
 
@@ -12,7 +12,22 @@ import urbanlogo from '../../images/talo.png';
 
 export default function Registerpage() {
    
+ /*I am pushing people AWAY from this page if they have user info details, i.e they have logged in */
+ 
+  const [userInfo,setUserInfo]  = useState(JSON.parse(window.sessionStorage.getItem('userInfo')))
   
+  const navigate = useNavigate()
+   
+  
+  useEffect(()=>{
+
+   if(userInfo !== null){
+     navigate('/home')
+   }
+
+ },[userInfo])
+
+  /*I am pushing people AWAY from this page if they have user info details, i.e they have logged in */
    
  
    useEffect(()=>{
@@ -27,13 +42,7 @@ export default function Registerpage() {
  
   
   
-   
- 
-
-
-
-
-
+  
 
   
   return (

@@ -1,4 +1,5 @@
 import React,{useEffect, useState, useRef} from 'react';
+import { useNavigate } from 'react-router-dom';
 import Grid from '@mui/material/Grid';
 import FilterListIcon from '@mui/icons-material/FilterList';
 import ArrowUpwardIcon from '@mui/icons-material/ArrowUpward';
@@ -28,8 +29,28 @@ import axios from 'axios'
 
 export default function Homepage() {
    
-   let url; /*the link to get the rsources (or the backend info) */
-   const [searchTerm,setSearchTerm] = useState(''); /*this is where database data will reside */ 
+  /*I am pushing people to login page if they dont have user info details, i.e they are not in */
+  const navigate = useNavigate()
+  const [userInfo,setUserInfo]  = useState(JSON.parse(window.sessionStorage.getItem('userInfo'))) 
+  
+
+     useEffect(()=>{
+  
+    console.log(userInfo)
+
+      if(userInfo === null){
+        navigate('/')
+       
+      }
+  
+    },[userInfo])
+
+    /*I am pushing people to login page if they dont have user info details, i.e they are not in END */
+
+
+
+
+   const [searchTerm,setSearchTerm] = useState('');
    /*const [filteredAClone,setFilteredAClone] = useState([])*/
 
    const [searchDone,setSearchDone] = useState(false);
@@ -50,8 +71,7 @@ export default function Homepage() {
      const fetchProperties = async() => {
       
      const {data} = await axios.get('/api/properties') //{data} is object destructuring from what we get back from axios , i totally forgot about object destructuring
-     console.log(data)
-     console.log(data.properties)
+     
       setAddressList(data.properties)
       setPage(data.page)
       setPages(data.pages)

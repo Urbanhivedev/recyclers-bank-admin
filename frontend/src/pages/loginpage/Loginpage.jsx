@@ -2,7 +2,7 @@ import React,{useEffect, useState, useRef} from 'react';
 
 import "./loginpage.css";
 
-import {Link} from "react-router-dom";
+import {Link,useNavigate} from "react-router-dom";
 
 import axios from 'axios'  
 
@@ -14,13 +14,21 @@ export default function Loginpage() {
    
   const [email,setEmail] = useState('')
    const [password,setPassword] = useState('')
-   const [userInfo,setUserInfo]  = useState('')
- 
+   const [userInfo,setUserInfo]  = useState(JSON.parse(window.sessionStorage.getItem('userInfo')))
+  
+   const navigate = useNavigate()
+    
+
+
+/*I am pushing people AWAY from this page if they have user info details, i.e they have logged in */
+   
    useEffect(()=>{
 
-    
- /*no need to put any dependencies in use effect just yet, I want the fetch to happen only when the page is loaded */
-  },[])
+    if(userInfo !== null){
+      navigate('/home')
+    }
+
+  },[userInfo])
  
 
    /*usually for my post routes*/
@@ -49,8 +57,9 @@ export default function Loginpage() {
     },
      config
     ) 
-  
-    localStorage.setItem('userInfo',JSON.stringify(data))
+    sessionStorage.setItem('userInfo',JSON.stringify(data))
+    setUserInfo(JSON.parse(window.sessionStorage.getItem('userInfo')))
+   
   
 
 

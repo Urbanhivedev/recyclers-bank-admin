@@ -5,8 +5,13 @@ import './topbar.css'
 import logo from '../../images/uhlogo.png'
 import profile from '../../images/sample-profile.jpg'
 import { NotificationsNone,Settings} from '@mui/icons-material/';
+import { useState,useEffect } from 'react'
 
 export default function Topbar(){
+
+    const [userInfo,setUserInfo]  = useState(JSON.parse(window.sessionStorage.getItem('userInfo')))
+
+
 
     return (
         
@@ -21,6 +26,11 @@ export default function Topbar(){
 
         {/*1*/}   <div className="topRight">
                         <div className="topbarIconContainer">
+                          <span className="loggedUser">
+                          {userInfo.userInfo.firstName.toUpperCase()} 
+                          {' '}
+                          {userInfo.userInfo.lastName.toUpperCase()}
+                          </span>
                           <Settings className="settingsIcon"/>
                          <NotificationsNone className="notificationIcon"/>
                          <span className="topIconBadge">
