@@ -1,3 +1,7 @@
+
+  /*REGISTER CSS HAS THE EXACT SAME CLASSES AS LOGIN CSS , SO BE CAREFUL WHEN YOU CHANGE A CLASS NAME*/
+
+
 .loginContainer {
     display:flex;
     flex-direction: column;
@@ -8,17 +12,19 @@
 }
 
 
-.formContainer {
+.formContainerReg {
     background-color: #ffffff;
     border-radius: 20px;
     margin-top: 30px;
+    min-width: 400px;;
+    
 
 }
 
 .form-grouping{
     padding: 0.25rem;
     background-color: #ffffff;
-   
+    
 }
 
 .input-box {
@@ -46,8 +52,7 @@
     flex-direction: column;
     justify-content: space-around;
     background-color: #ffffff;
-    width: 400px;
-    height: 100px;
+   
 
     margin: 1rem auto 0rem auto; /*this margin interacts with the buttons margin, the 0rem one*/
     padding: 0.25rem;
@@ -55,14 +60,14 @@
   
 }
 
-.urbanLogo {
-    height:400px; /*HARD CODED HEIGHT FOR NOW, CONSIDER RESPONSIVENESS LATER*/
+.urbanLogoReg {
+    height:200px; /*HARD CODED HEIGHT FOR NOW, CONSIDER RESPONSIVENESS LATER*/
     
 }
 
-.buttonAdjust {
+.buttonAdjustReg {
     display: block;
-    width: 30%;
+    width: 50%;
     font-weight: bold;
     margin:60px auto 0px;
     padding: 0.75rem;
@@ -72,18 +77,19 @@
     cursor: pointer;
 }
 
+.fakeAtag {
+    text-decoration: underline;
+}
 
 .relativeParent{
     position:relative; 
 }
 
 
-.registrationLink{
+.registrationLinkReg{
     color: black;
     background-color: white;
-    position: absolute;
-    left:-5%;
-    top:16px;
+    
     
    
 }

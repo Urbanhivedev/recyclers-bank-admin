@@ -121,29 +121,29 @@ const getProperties = asyncHandler(async (req,res)=>{
 
   const getPropertyByAddress = asyncHandler(async(req,res)=>{
     res.header("Access-Control-Allow-Origin","*")
-     /*const searchAddress = req.params.address
-     console.log(searchAddress)
-
-    
-const docRef = doc(dbtest,"estate", "collection")
-
-getDoc(docRef)
- .then((doc) => {
-    
-     doc.filter((item)=>( item.address === searchAddress)).forEach((doc) => {
-   
-        property.push(doc)
-  
-})
-       
- } )*/
+     
  const property = [] 
 
 
   property.push( ...properties[0].data.filter((p) => p.address === req.params.address) )
     
-  console.log(property)
+  /*console.log(property)*/
     res.json({property})
+  })
+
+
+
+
+  const useAddressToFindPosition = asyncHandler(async(req,res)=>{
+    res.header("Access-Control-Allow-Origin","*")
+     
+ 
+    
+
+    const id =  properties[0].data.findIndex((p) => p.address === req.params.addressalso) 
+    
+  console.log(id)
+    res.json({id:id})
   })
 
 
@@ -160,7 +160,7 @@ getDoc(docRef)
 console.log(req.body)
 
     
-   /updateDoc(docRef, {
+   updateDoc(docRef, {
     data:[...properties[0].data,{
       address:propertyAddress,
       amountLeft:"",
@@ -193,6 +193,58 @@ console.log(req.body)
   })
 
 
+  const editProperty = asyncHandler(async(req,res)=>{
+    res.header("Access-Control-Allow-Origin","*")
+    
+    const propertyAddress = req.body.propertyAddress
+    const purchasePrice = req.body.purchasePrice
+    const purchaseDate = req.body.purchaseDate
+    const yearBuilt = req.body.yearBuilt
+    const percentage = req.body.percentage
+    const type = req.body.type
+
+    const arrayPosition = req.params.id
+    console.log(propertyAddress,purchaseDate,purchaseDate,yearBuilt)
 
 
-  export {getProperties,getPropertyByAddress,addNewProperty}
+/*updating the property in the array,so we can reset and submit */
+   
+const arrayToUpdate = properties[0].data
+
+properties[0].data[arrayPosition] = 
+{
+  address:propertyAddress,
+  amountLeft:"",
+  earn:[""],
+  image:"https://firebasestorage.googleapis.com/v0/b/catex-54325.appspot.com/o/image%2FHouse1.jpeg?alt=media&token=1532e522-f03d-42da-a9c5-180348572d19",
+  images:[""],
+  monthlyIncome:"",
+  monthlyReturn:"",
+  percentage:percentage,
+  percentageReturn:"",
+  purchaseDate:purchaseDate,
+  purchasePrice:purchasePrice,
+  totalReturn:"",
+  type:type,
+  yearBuilt:yearBuilt
+}
+
+
+/*updating the property in the array, so we can reset and submit END*/
+   /*remember to change the date property in firebase to have a type of date ! */
+   updateDoc(docRef, {
+      data:properties[0].data
+     }).then(
+  
+       res.json({submitted:true})
+  
+     )
+   
+     
+  }
+   )
+
+
+
+
+  export {getProperties,getPropertyByAddress,editProperty,addNewProperty,useAddressToFindPosition}

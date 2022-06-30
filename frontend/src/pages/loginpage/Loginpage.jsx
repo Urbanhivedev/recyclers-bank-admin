@@ -12,8 +12,9 @@ import urbanlogo from '../../images/talo.png';
 
 export default function Loginpage() {
    
-  
-   
+  const [email,setEmail] = useState('')
+   const [password,setPassword] = useState('')
+   const [userInfo,setUserInfo]  = useState('')
  
    useEffect(()=>{
 
@@ -21,19 +22,43 @@ export default function Loginpage() {
  /*no need to put any dependencies in use effect just yet, I want the fetch to happen only when the page is loaded */
   },[])
  
- 
- 
- 
- 
+
+   /*usually for my post routes*/
+   const config = {
+    method:"POST",
+    headers:{
+      'Content-Type':'application/json'
+      
+    }
+  }
+  /*usually for my post routes END */
+
+
+
+
+  const  loginHandler = async(e) => {
+     
+    e.preventDefault()
+      
+
+    const {data} = await axios.post(`/api/users/`,
+    {
+      email:email,
+      password:password,
+     
+    },
+     config
+    ) 
   
+    localStorage.setItem('userInfo',JSON.stringify(data))
   
-   
+
+
+  }
+
  
-
-
-
-
-
+ 
+ 
 
   
   return (
@@ -47,36 +72,43 @@ export default function Loginpage() {
 
        <div >
      
-        <form className="formContainer">
+        <form className="formContainer" onSubmit={loginHandler}>
            
            <div className=" inputOrganiser">
             
             <div className="form-grouping">
            <label id="name-label" for="name" className="backgroundColor">Email Address</label>
-            <input type="text" placeholder='enter your email' className="input-box"/>
+            <input type="email" placeholder='enter your email' className="input-box" required value={email} onChange={(e)=>setEmail(e.target.value)}/>
             </div>
    
             <div className="form-grouping">
             <label id="name-label" for="name" className="backgroundColor">Password</label>
-            <input type="password"  placeholder='enter your password' className="input-box"/>
+            <input type="password"  placeholder='enter your password' className="input-box" required value={password} onChange={(e)=>setPassword(e.target.value)}/>
             </div>
            
             </div>
 
 
 
-            <div className="form-group backgroundColor">
+            <div className="form-grouping backgroundColor">
          
-          <Link to = {"/home"} >
+          
           <button type="submit" id="submit" className=" buttonAdjust" >
             LOGIN
           </button>
-          </Link>
+         
            </div>
+
+
+       <div className="relativeParent">
+        <Link to = {"/register"} >
+       <div className='registrationLink'>Don't have an account ? <span className="fakeAtag">Register</span></div>
+        </Link>
+        </div>
 
         </form>
 
-
+       
        </div>
         
       

@@ -27,7 +27,7 @@ export default function Propertytable() {
    
   const [pages,setPages] = useState(1);
    const [page,setPage] = useState(1);
-   const [addressList,setAddressList] = useState([]);
+   const [propertyList,setPropertyList] = useState([]);
   
 
 
@@ -36,9 +36,9 @@ export default function Propertytable() {
     const fetchProperties = async() => {
      
     const {data} = await axios.get('/api/properties') //{data} is object destructuring from what we get back from axios , i totally forgot about object destructuring
-    console.log(data)
+   
     console.log(data.properties)
-     setAddressList(data.properties)
+     setPropertyList(data.properties)
      setPage(data.page)
      setPages(data.pages)
 
@@ -55,7 +55,7 @@ export default function Propertytable() {
     owners:"kenny Dominguez",
     type:"Built",
     price:"$327,550"
-    
+    /* this is my dummy properties array , I use it for only owners, since there's no owners in my database */
 
   },{
     _id:"2",
@@ -128,16 +128,16 @@ export default function Propertytable() {
          </tr>
          
          
-          {properties.map(property => (
-            <tr className='tr' key={property._id} >
-              <td className='td'>{property._id}</td>
-              <td className='td' >{property.owners}</td>
+          {propertyList.map(property => (
+            <tr className='tr' key={propertyList.indexOf(property)} >
+              <td className='td'>{propertyList.indexOf(property) + 1}</td>
+              <td className='td' >{properties[propertyList.indexOf(property)].owners}</td>
               <td className='td backgroundColor'>{property.address}</td>
-              <td className='td backgroundColor'>{property.type  }</td>
+              <td className='td backgroundColor'>{property.type}</td>
               <td className='td backgroundColor'>{property.price}</td>
              
               <td className='td'>    
-              <Link to={`/admin/user/${property._id}/edit`}>
+              <Link to={`/admin/editproperty/${property.address}`}>
                 <Button className = "buttonStyle">
                   <EditIcon className = "iconNB"/> 
                 </Button>
