@@ -108,4 +108,58 @@ const authUser = asyncHandler(async (req, res) => {
   })
 
 
-  export {authUser}
+
+
+  const registerUser = asyncHandler(async (req, res) => {
+    res.header("Access-Control-Allow-Origin","*")
+    
+    const { email, password, firstName,lastName,phoneNumber} = req.body
+    console.log(email)
+
+    /* 1  adding to firestore */
+     
+    addDoc(colRef,{
+      email: email,
+      firstName:firstName,
+      lastName:lastName,
+      phoneNumber:phoneNumber,
+
+    } )
+
+    /*adding to firestore END */
+
+
+   /*2  sending from firestore */
+    const user = []
+    const q =  query(colRef, where("email", "==", `${email}`))
+    
+   onSnapshot(q,(snapshot) => {
+     snapshot.docs.forEach((doc)=>{
+      user.push({...doc.data(),id:doc.id})
+     })
+     console.log(user.length)
+     if (user.length > 0){ 
+      res.json({
+      userInfo:user[0] /*i am unpeeling the info from the array */
+    }) 
+  }
+   })
+  /*sending from firestore END*/
+  
+
+   
+  /*if (user.length > 0){ figure out why it jumps straight to else first ? i.e why am I getting 401 error before it parses the array
+     
+        res.json({
+        userInfo:user[0] 
+      })
+    } else {
+      res.status(401)
+      throw new Error('invalid email or password')
+    } */ 
+  
+  
+  })
+
+
+  export {authUser,registerUser}

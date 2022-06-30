@@ -60,9 +60,6 @@ export default function Loginpage() {
     sessionStorage.setItem('userInfo',JSON.stringify(data))
     setUserInfo(JSON.parse(window.sessionStorage.getItem('userInfo')))
    
-  
-
-
   }
 
  
