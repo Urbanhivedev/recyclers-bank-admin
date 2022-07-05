@@ -4,8 +4,12 @@ import asyncHandler from 'express-async-handler'
 //const Product = require('../models/productModel.js') ES5 VERSION
 //const asyncHandler = require('express-async-handler') ES5 VERSION
 
-import { getFirestore, collection, where , query ,getDocs ,addDoc, deleteDoc ,doc, getDoc ,updateDoc} from 'firebase/firestore';
+import { getFirestore, collection, where , query ,getDocs ,addDoc, deleteDoc ,doc, getDoc ,updateDoc,onSnapshot} from 'firebase/firestore';
+
 import { initializeApp } from 'firebase/app'
+
+import {getStorage,ref,uploadBytes,listAll,getDownloadURL} from 'firebase/storage'
+
 
 import dotenv from 'dotenv'
 //const dotenv = require('dotenv')
@@ -25,7 +29,9 @@ const firebaseConfig = {
 
 
 /*just an experiment to try the other firebase way */
-initializeApp(firebaseConfig) 
+const app = initializeApp(firebaseConfig) 
+
+const storage = getStorage(app)
 
 const dbtest = getFirestore()
 
@@ -37,7 +43,7 @@ let properties = []
 let messages = []
 
 
-getDocs(colRef)
+/*getDocs(colRef)
  .then((snapshot) => {
 
     
@@ -46,12 +52,21 @@ getDocs(colRef)
 
      properties.push({...doc.data(), id:doc.id})
      }) 
-      /*console.log(properties[0].data)*/
+    
 
- })
+ })I NEEDED CONTINUOUS FEEDBACK SO I DECIDED TO USE ONSNAPSHOT INSTEAD OF GETDOCS */
+
+ onSnapshot(colRef,(snapshot) => {
+  snapshot.docs.filter((doc)=>(doc.id === 'collection')).forEach((doc)=>{
+   properties.push({...doc.data(),id:doc.id})
+  })
+  console.log(properties[0].data.length)
+ 
+})
+
  
  
- getDocs(colRef).then((snapshot) =>{
+ /*getDocs(colRef).then((snapshot) =>{
 
     
   snapshot.docs.filter((doc)=>(doc.id === 'message')).forEach((doc) => {
@@ -59,24 +74,22 @@ getDocs(colRef)
 
   messages.push({...doc.data(), id:doc.id})
   }) 
-   /*console.log(messages)*/
+  
 
-} ) 
+} )  I NEEDED CONTINUOUS FEEDBACK SO I DECIDED TO USE ONSNAPSHOT INSTEAD OF GETDOCS*/
+
+onSnapshot(colRef,(snapshot) => {
+  snapshot.docs.filter((doc)=>(doc.id === 'message')).forEach((doc)=>{
+   messages.push({...doc.data(),id:doc.id})
+  })
+  
+ 
+})
 
 
  /*just an experiment to try the other firebase way END */
 
- /* THIS ONE WORKS BUT IT GIVES ME AN UNDESIRABLE RESULT SO I AM NOT USING IT FOR NOW
-const docRef = query( doc(dbtest,"estate", "collection"))
 
-getDoc(docRef)
- .then((doc) => {
-  console.log('second one !!!')
- 
-   
-   
- } )
-*/
 
 const getProperties = asyncHandler(async (req,res)=>{
     res.header("Access-Control-Allow-Origin","*")
@@ -156,16 +169,17 @@ const getProperties = asyncHandler(async (req,res)=>{
     const yearBuilt = req.body.yearBuilt
     const percentage = req.body.percentage
     const type = req.body.type
+    const imageUrl = req.body.imageUrl
    
-console.log(req.body)
-
+     
+  
     
    updateDoc(docRef, {
     data:[...properties[0].data,{
       address:propertyAddress,
       amountLeft:"",
       earn:[""],
-      image:"https://firebasestorage.googleapis.com/v0/b/catex-54325.appspot.com/o/image%2FHouse1.jpeg?alt=media&token=1532e522-f03d-42da-a9c5-180348572d19",
+      image:imageUrl,
       images:[""],
       monthlyIncome:"",
       monthlyReturn:"",
@@ -182,10 +196,11 @@ console.log(req.body)
 
     }]
 
+   
+
    }).then(
-
-     res.json({submitted:true})
-
+   
+     res.json({submitted:true}),
    )
 
 
@@ -202,9 +217,12 @@ console.log(req.body)
     const yearBuilt = req.body.yearBuilt
     const percentage = req.body.percentage
     const type = req.body.type
+    const newImage = req.body.image
 
     const arrayPosition = req.params.id
     console.log(propertyAddress,purchaseDate,purchaseDate,yearBuilt)
+
+/*dont forget to set the new image, fetch its url then put the URL into the array below */
 
 
 /*updating the property in the array,so we can reset and submit */

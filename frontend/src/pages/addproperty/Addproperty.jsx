@@ -12,7 +12,13 @@ import House1 from '../../images/house1.jpeg';*/
 import {Link} from "react-router-dom";
 import Searchandfilter from '../../components/searchandfilter/Searchandfilter';
 import axios from 'axios'  
+import { getNativeSelectUtilityClasses } from '@mui/material';
 
+import {getStorage,ref,uploadBytes,listAll,getDownloadURL} from 'firebase/storage'
+import { initializeApp } from 'firebase/app'
+
+/*import dotenv from 'dotenv'*/
+import {v4} from 'uuid'
 
 
 
@@ -22,9 +28,10 @@ export default function AddProperty() {
 /*I am pushing people to login page if they dont have user info details, i.e they are not in */
   const navigate = useNavigate()
   const [userInfo,setUserInfo]  = useState(JSON.parse(window.sessionStorage.getItem('userInfo'))) 
-   
-     useEffect(()=>{
   
+  
+     useEffect(()=>{
+     
       if(userInfo === null){
         navigate('/')
       }
@@ -34,10 +41,25 @@ export default function AddProperty() {
     /*I am pushing people to login page if they dont have user info details, i.e they are not in END */
 
 
+    /*firebase connection seeking*/
+    /*dotenv.config()*/
 
+    const firebaseConfig = {
+      apiKey: process.env.REACT_APP_API_KEY,
+      authDomain: process.env.REACT_APP_AUTH_DOMAIN,
+      projectId: process.env.REACT_APP_PROJECT_ID,
+      storageBucket: process.env.REACT_APP_STORAGE_BUCKET,
+      messagingSenderId: process.env.REACT_APP_MESSAGING_SENDER_ID,
+      appId: process.env.REACT_APP_APP_ID,
+      measurementId: process.env.REACT_APP_MEASUREMENT_ID
+    };
 
+    const app = initializeApp(firebaseConfig) 
 
+    const storage = getStorage(app)
 
+    
+    
   
    const [property,setProperty] = useState({}); /*this is where the  database information will reside */ 
 
@@ -57,7 +79,11 @@ export default function AddProperty() {
    const [percentage,setPercentage] = useState('')
    const [yearBuilt,setYearBuilt] = useState('')
    const [purchaseDate,setPurchaseDate] = useState(date)
-   
+   const [image,setImage] = useState('')
+   const [returnData, setReturnData] = useState('')
+  
+
+
    const { address } = useParams();
 
 
@@ -78,22 +104,43 @@ export default function AddProperty() {
  const  submitPropertyHandler = async(e) => {
      
     e.preventDefault()
-      
 
-    const {data} = await axios.post("/api/properties/newproperty",
-    {
-      propertyAddress:propertyAddress,
-      type:type ,
-      purchasePrice:purchasePrice,
-      purchaseDate:purchaseDate,
-      yearBuilt:yearBuilt,
-      percentage:percentage
-    },
-     config
-    ) 
-   
+      console.log('the submit has started')
     
-    setSubmitted(data.submitted) 
+    /*uploading the image to firebase */
+      const newImageName = `image/${v4() + image.name}`
+
+    const imageRef = ref(storage , newImageName )
+    
+    
+    uploadBytes(imageRef,image).then((snapshot)=>{
+     
+         /*uploading the image to firebase END */
+    
+      getDownloadURL(imageRef).then(async(url)=>{
+     
+           /*i am only sending the post request when i am sure i have set the image url */
+           console.log(url)
+
+          const {data} = await axios.post("/api/properties/newproperty",
+          {
+            imageUrl:url,
+            propertyAddress:propertyAddress,
+            type:type,
+            percentage:percentage,
+            yearBuilt:yearBuilt,
+            purchasePrice:purchasePrice,
+            purchaseDate:purchaseDate
+          },
+           config
+          ) 
+         
+          setSubmitted(data.submitted)
+           
+         } ) 
+        })
+
+       
 
   }
 
@@ -144,18 +191,7 @@ export default function AddProperty() {
         </p>)
         }
 
-       {submitted===true &&
-        
-       <p id="description" className="successMessage text-center">
-         <DoneIcon className="doneIcon"/> SUBMITTED SUCCESSFULLY ! 
-       </p> 
-       }
-
-       {submitted===false &&
-         <p id="description" className="failureMessage text-center">
-        <ReplayIcon className="doneIcon"/>SOMETHING WENT WRONG, PLEASE TRY AGAIN 
-      </p>
-       }
+       
          
         
       </header>
@@ -206,10 +242,10 @@ export default function AddProperty() {
 
 
         <div className="form-group">
-          <label id="number-label" for="number"
+          <label id="number-label" for="purchaseDate"
             >Purchase Date<span className="clue">(leave blank if house not purchased)</span></label>
           
-          <input type="date" id="start" name="trip-start"
+          <input type="date" id="purchaseDate" name="trip-start"
        value={purchaseDate} onChange={(e)=>setPurchaseDate(e.target.value)}
        min="2016-01-01" max={date} className="form-control"/>
 
@@ -217,7 +253,7 @@ export default function AddProperty() {
         </div>
         
         <div className="form-group">
-          <label id="email-label" for="email">Purchase Price</label>
+          <label id="email-label" for="purchasePrice">Purchase Price</label>
           <input
             type="text"
             name="purchase price"
@@ -231,7 +267,7 @@ export default function AddProperty() {
 
 
           <div className="form-group">
-          <label id="email-label" for="email">Percentage</label>
+          <label id="email-label" for="percentage">Percentage</label>
           <input
             type="text"
             name="percentage"
@@ -244,7 +280,22 @@ export default function AddProperty() {
         </div> 
 
 
+
+
+        <div className="form-group">
+        <label id="percentage-label" for="image">Property Image</label>
+        <input 
+        type="file"
+        id="image"
+        name="image"
+        accept=".png ,.jpg , .jpeg ,.jfif ,.webp"
+        className="form-control"
+        placeholder="please choose an image for the property"
+        onChange={(e)=>{setImage(e.target.files[0])}}
        
+        required
+       />
+        </div> 
 
 
         <div className="form-group">
@@ -252,7 +303,26 @@ export default function AddProperty() {
             Submit
           </button>
         </div>
+
+
+        {submitted===true &&
+        
+        <p id="description" className="successMessage text-center">
+          <DoneIcon className="doneIcon"/> SUBMITTED SUCCESSFULLY ! 
+        </p> 
+        }
+ 
+        {submitted===false &&
+          <p id="description" className="failureMessage text-center">
+         <ReplayIcon className="doneIcon"/>SOMETHING WENT WRONG, PLEASE TRY AGAIN 
+       </p>
+        }
       </form>
+
+
+      
+
+
     </div>
         
       </> 

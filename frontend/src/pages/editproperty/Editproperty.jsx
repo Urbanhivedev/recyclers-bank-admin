@@ -98,7 +98,7 @@ export default function EditProperty() {
    const config = {
     method:"POST",
     headers:{
-      'Content-Type':'application/json'
+      'Content-Type':'multipart/form-data'
       
     }
   }
@@ -122,6 +122,7 @@ export default function EditProperty() {
       yearBuilt:yearBuilt,
       percentage:percentage,
       arrayPosition:arrayPosition,
+      image:image
     },
      config
     ) 
