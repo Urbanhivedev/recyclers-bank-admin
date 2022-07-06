@@ -13,6 +13,8 @@ import AccountBalanceIcon from '@mui/icons-material/AccountBalance';
 import SupervisedUserCircleIcon from '@mui/icons-material/SupervisedUserCircle';
 import MapsHomeWorkIcon from '@mui/icons-material/MapsHomeWork';
 import WifiProtectedSetupIcon from '@mui/icons-material/WifiProtectedSetup';
+import PaidIcon from '@mui/icons-material/Paid';
+import ReceiptIcon from '@mui/icons-material/Receipt';
 
 import {Button} from 'react-bootstrap'
 
@@ -32,8 +34,8 @@ export default function Sidebar() {
         
         <div className="sidebar">
 
-<div  className = "buttonSidebar" onClick = {changeMode}>
-                  <WifiProtectedSetupIcon className = "iconNB"/> {admin ?"Admin Mode":"User Mode"}
+<div  className = "buttonSidebar" >
+                  <WifiProtectedSetupIcon className = "iconNB"/> {"Admin Mode"}
                 </div>
 
                 
@@ -55,60 +57,14 @@ export default function Sidebar() {
                 </div> {/*sidebar menu closing */}
 
 
-                <div className="sidebarMenu">
-                    <h3 className="sidebarTitle">SEARCH</h3>
-                   <ul className="sidebarList">
-                     
-                      {/*I had to assign each emoji component a classname here, to enforce background color*/ }
-                     
-                    
-                 <Link to ={'/properties/built'} className="linkref">
-                     <li className="sidebarListItem">
-                         <AccountBalanceIcon  className="sidebarListItemIcon"/>
-                         Built 
-                         
-                     </li>
-                     </Link> 
+               
 
-
-
-                     <Link  className="linkref" to={"/properties/offplan"}>
-                     <li className="sidebarListItem">
-                       
-                         <NearMeIcon className="sidebarListItemIcon"/>
-                            Off Plan 
-                   
-                     </li>
-                    </Link> 
-
-                     
-
-
-                    </ul> 
-                </div> {/*sidebar menu closing */}
-
-          { !admin && 
-                 <>
-                <div className="sidebarMenu">
-                    <h3 className="sidebarTitle"> MESSAGES </h3>
-                   
-                </div> 
-
-                   <br/>
-
-
-                   <div className="sidebarMenu">
-                    <h3 className="sidebarTitle">SETTINGS </h3>
-                  
-                </div>
-                </>
-             }
                
                 <br/>
                    <br/>
                    <br/> {/**maybe later i will use CSS margins to create spaces between options, not margins */}
                    
-               { admin &&
+              
                
                <div className="sidebarMenu">
                     <h3 className="sidebarTitle">ADMIN</h3>
@@ -119,8 +75,8 @@ export default function Sidebar() {
                     
                  <Link to ={"/admin/propertylist"} className="linkref">
                      <li className="sidebarListItem">
-                         <MapsHomeWorkIcon  className="sidebarListItemIcon"/>
-                         Manage Properties 
+                         <PaidIcon  className="sidebarListItemIcon"/>
+                         Manage Transactions
                          
                      </li>
                 </Link> 
@@ -136,12 +92,35 @@ export default function Sidebar() {
                      </li>
                     </Link> 
 
+
+
+                    <Link  className="linkref" to={"/admin/propertylist"}>
+                     <li className="sidebarListItem">
+                       
+                         <MapsHomeWorkIcon className="sidebarListItemIcon"/>
+                            Manage Apartments
+                   
+                     </li>
+                    </Link> 
+
+
+
+
+                    <Link  className="linkref" to={"/admin/userlist"}>
+                     <li className="sidebarListItem">
+                       
+                         <ReceiptIcon className="sidebarListItemIcon"/>
+                            Manage Reservations
+                   
+                     </li>
+                    </Link> 
+
                      
 
 
                     </ul> 
                 </div> 
-                 }
+                 
 
 
                  {/*sidebar menu closing */}

@@ -50,7 +50,7 @@ function App() {
          <Route  path="/" element={<Loginpage/>} />
          <Route  path="/register" element={<Registerpage/>} />
           
-           <Route  path="/home" element={<Homepage/>} />
+           <Route  path="/home" element={<Propertytable/>} />
            <Route  path="/properties/offplan" element={<OffplanPropertylist/>} />
            <Route  path="/properties/built" element={<BuiltPropertylist/>} />
            <Route  path="/admin/addproperty" element={<AddProperty/>} />

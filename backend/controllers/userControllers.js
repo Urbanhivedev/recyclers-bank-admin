@@ -37,31 +37,16 @@ let users = []
 
 
 
-getDocs(colRef)
- .then((snapshot) => {
-
-    
-     snapshot.docs.forEach((doc) => {
+ onSnapshot(colRef,(snapshot) => {
+  snapshot.docs.forEach((doc) => {
       
-
     users.push({...doc.data(), id:doc.id})
      }) 
-     /* console.log(users)*/
-
- })
+     
+})
  
  
- getDocs(colRef).then((snapshot) =>{
 
-    
-  snapshot.docs.filter((doc)=>(doc.id === 'message')).forEach((doc) => {
-   
-
-  messages.push({...doc.data(), id:doc.id})
-  }) 
-   /*console.log(messages)*/
-
-} ) 
 
 
  /*calling all the firebase stuff  END */
@@ -91,18 +76,6 @@ const authUser = asyncHandler(async (req, res) => {
   }
    })
 
-  
-
-   
-  /*if (user.length > 0){ figure out why it jumps straight to else first ? i.e why am I getting 401 error before it parses the array
-     
-        res.json({
-        userInfo:user[0] 
-      })
-    } else {
-      res.status(401)
-      throw new Error('invalid email or password')
-    } */ 
   
   
   })
@@ -160,6 +133,45 @@ const authUser = asyncHandler(async (req, res) => {
   
   
   })
+  
+
+  const getUsers = asyncHandler(async (req,res)=>{
+    res.header("Access-Control-Allow-Origin","*")
+    const pageSize = 3 // 3 per page as dean has asked
+       const page = Number(req.query.pageNumber) || 1
+  
+   
+  let count;
+  let propertylist;
+  
+    const keyword = req.query.keyword ? { // i just left this keyword here in case i may need it for searching one day
+     name: {
+       $regex: req.query.keyword,
+       $options:'i' // it means case insensitive 
+     }
+   
+   }:{}
+   
+   
+   
+  count = users.length
+  const userSegmentation = (array, pageSize, pageNumber) => {
+    
+    
+    return array.slice((pageNumber - 1) * pageSize, pageNumber * pageSize);
+  
+  }
+  
+  
 
 
-  export {authUser,registerUser}
+  const userlistinfo = userSegmentation(users,pageSize,page)
+  
+  
+
+
+  
+    res.json({users:userlistinfo, page,pages:Math.ceil(count/pageSize)})
+  })
+
+  export {authUser,registerUser,getUsers}

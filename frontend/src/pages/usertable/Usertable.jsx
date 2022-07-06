@@ -37,16 +37,28 @@ export default function Usertable() {
    
   const [pages,setPages] = useState(1);
    const [page,setPage] = useState(1);
+  const [userList, setUserList]= useState([])
+
+
+   useEffect(()=>{
+
+    const fetchProperties = async() => {
+     
+    const {data} = await axios.get('/api/users') //{data} is object destructuring from what we get back from axios , i totally forgot about object destructuring
+   
+    console.log(data.users)
+     setUserList(data.users)
+     setPage(data.page)
+     setPages(data.pages)
+
+   }
+
+   fetchProperties()
+
+/*no need to put any dependencies in use effect just yet, I want the fetch to happen only when the page is loaded */
+ },[])
   
-
-
-  useEffect(()=>{
-
-    
-
-  },[])
-  
-  const users = [{
+  /*const users = [{
     _id:"1",
     email:"dagogouranto@gmail.com",
     name:"kenny Dominguez",
@@ -66,7 +78,7 @@ export default function Usertable() {
     email:"tommyboy@gmail.com",
     name:"Aubrey Graham",
 
-  }]
+  }]*/
   
   
   return (
@@ -106,16 +118,18 @@ export default function Usertable() {
            <th className='th'>ID</th>
            <th className='th'>NAME</th>
            <th className='th'>EMAIL</th>
+           <th className='th'>PHONE NUMBER</th>
            <th className='th'></th>
            <th className='th'></th>
          </tr>
          
          
-          {users.map(user => (
-            <tr className='tr' key={user._id}  >
-              <td className='td'>{user._id}</td>
-              <td className='td' >{user.name}</td>
+          {userList.map(user => (
+            <tr className='tr' key={user.id}  >
+              <td className='td'>{userList.indexOf(user) + 1}</td>
+              <td className='td' >{user.firstName + ' ' + user.lastName  }</td>
               <td className='td backgroundColor'>{user.email}</td>
+              <td className='td backgroundColor'>{user.phoneNumber}</td>
              
               <td className='td'>    
               <Link to={`/admin/user/${user._id}/edit`}>
@@ -140,10 +154,10 @@ export default function Usertable() {
          
         </table>
         
-          
+        <Paginate page={page} pages={pages}/>
       </div>
         
-      <Paginate page={page} pages={pages}/>
+     
       </> 
       
     )

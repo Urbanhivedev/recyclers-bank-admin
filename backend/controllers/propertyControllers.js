@@ -35,49 +35,27 @@ const storage = getStorage(app)
 
 const dbtest = getFirestore()
 
-const colRef = collection(dbtest , "estate")
+const colRef = collection(dbtest , "apartments")
 const docRef = doc(dbtest, "estate","collection")
 
 /**the arrays i will send in my fetch requests */
-let properties = []
+let apartments = []
 let messages = []
 
 
-/*getDocs(colRef)
- .then((snapshot) => {
 
-    
-     snapshot.docs.filter((doc)=>(doc.id === 'collection')).forEach((doc) => {
-      
-
-     properties.push({...doc.data(), id:doc.id})
-     }) 
-    
-
- })I NEEDED CONTINUOUS FEEDBACK SO I DECIDED TO USE ONSNAPSHOT INSTEAD OF GETDOCS */
-
+  /*CONTINUOUS FEEDBACK FOR apartments ARRAY */
  onSnapshot(colRef,(snapshot) => {
   snapshot.docs.filter((doc)=>(doc.id === 'collection')).forEach((doc)=>{
-   properties.push({...doc.data(),id:doc.id})
+   apartments.push({...doc.data(),id:doc.id})
   })
-  console.log(properties[0].data.length)
+  console.log(apartments[0].space)
  
 })
 
  
  
- /*getDocs(colRef).then((snapshot) =>{
-
-    
-  snapshot.docs.filter((doc)=>(doc.id === 'message')).forEach((doc) => {
-   
-
-  messages.push({...doc.data(), id:doc.id})
-  }) 
-  
-
-} )  I NEEDED CONTINUOUS FEEDBACK SO I DECIDED TO USE ONSNAPSHOT INSTEAD OF GETDOCS*/
-
+ /*CONTINUOUS FEEDBACK FOR MESSAGES ARRAY */
 onSnapshot(colRef,(snapshot) => {
   snapshot.docs.filter((doc)=>(doc.id === 'message')).forEach((doc)=>{
    messages.push({...doc.data(),id:doc.id})
@@ -110,7 +88,7 @@ const getProperties = asyncHandler(async (req,res)=>{
    
    
    
-  count = properties[0].data.length
+  count = apartments[0].space.length
   propertylist = (array, pageSize, pageNumber) => {
     
     
@@ -121,7 +99,7 @@ const getProperties = asyncHandler(async (req,res)=>{
   
 
 
-  const propertylists = propertylist(properties[0].data,pageSize,page)
+  const propertylists = propertylist(apartments[0].space,pageSize,page)
   
   
 
@@ -138,7 +116,7 @@ const getProperties = asyncHandler(async (req,res)=>{
  const property = [] 
 
 
-  property.push( ...properties[0].data.filter((p) => p.address === req.params.address) )
+  property.push( ...apartments[0].space.filter((p) => p.address === req.params.address) )
     
   /*console.log(property)*/
     res.json({property})
@@ -153,7 +131,7 @@ const getProperties = asyncHandler(async (req,res)=>{
  
     
 
-    const id =  properties[0].data.findIndex((p) => p.address === req.params.addressalso) 
+    const id =  apartments[0].space.findIndex((p) => p.address === req.params.addressalso) 
     
   console.log(id)
     res.json({id:id})
@@ -175,7 +153,7 @@ const getProperties = asyncHandler(async (req,res)=>{
   
     
    updateDoc(docRef, {
-    data:[...properties[0].data,{
+    data:[...apartments[0].space,{
       address:propertyAddress,
       amountLeft:"",
       earn:[""],
@@ -227,9 +205,9 @@ const getProperties = asyncHandler(async (req,res)=>{
 
 /*updating the property in the array,so we can reset and submit */
    
-const arrayToUpdate = properties[0].data
+const arrayToUpdate = apartments[0].space
 
-properties[0].data[arrayPosition] = 
+apartments[0].space[arrayPosition] = 
 {
   address:propertyAddress,
   amountLeft:"",
@@ -251,7 +229,7 @@ properties[0].data[arrayPosition] =
 /*updating the property in the array, so we can reset and submit END*/
    /*remember to change the date property in firebase to have a type of date ! */
    updateDoc(docRef, {
-      data:properties[0].data
+      data:apartments[0].space
      }).then(
   
        res.json({submitted:true})
