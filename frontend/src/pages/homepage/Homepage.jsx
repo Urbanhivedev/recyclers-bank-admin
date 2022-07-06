@@ -45,7 +45,7 @@ export default function Homepage() {
         navigate('/admin/propertylist/') /*just a makeshift re-navigation, until i can figure out what to do with my base path */
       }
   
-    },[userInfo])
+    },[userInfo,navigate])
 
     /*I am pushing people to login page if they dont have user info details, i.e they are not in END */
 
@@ -89,7 +89,7 @@ export default function Homepage() {
  
  
  
-   useEffect(()=>{
+   /*useEffect(()=>{
 
    addressList.forEach((address) => {
    
@@ -104,7 +104,7 @@ export default function Homepage() {
       setFilteredAddresses([])
     }
  })
-  },[searchDone])
+  },[searchDone])*/
   
    
   
