@@ -41,6 +41,8 @@ export default function Homepage() {
       if(userInfo === null){
         navigate('/')
        
+      }else{
+        navigate('/admin/propertylist/') /*just a makeshift re-navigation, until i can figure out what to do with my base path */
       }
   
     },[userInfo])

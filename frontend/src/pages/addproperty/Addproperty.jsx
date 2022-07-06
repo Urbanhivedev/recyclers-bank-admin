@@ -73,12 +73,11 @@ export default function AddProperty() {
 
 
    /*form information state */
-   const [propertyAddress,setPropertyAddress] = useState('')
-   const [type,setType] = useState('')
-   const [purchasePrice,setPurchasePrice] = useState('')
-   const [percentage,setPercentage] = useState('')
-   const [yearBuilt,setYearBuilt] = useState('')
-   const [purchaseDate,setPurchaseDate] = useState(date)
+   const [apartmentAddress,setApartmentAddress] = useState('')
+   const [apartmentLocation,setApartmentLocation] = useState('')
+   const [apartmentName,setApartmentName] = useState('')
+   
+  /* const [purchaseDate,setPurchaseDate] = useState(date) in case a need a field type date in future*/
    const [image,setImage] = useState('')
    const [returnData, setReturnData] = useState('')
   
@@ -108,7 +107,7 @@ export default function AddProperty() {
       console.log('the submit has started')
     
     /*uploading the image to firebase */
-      const newImageName = `image/${v4() + image.name}`
+      const newImageName = `images/${v4() + image.name}`
 
     const imageRef = ref(storage , newImageName )
     
@@ -125,12 +124,10 @@ export default function AddProperty() {
           const {data} = await axios.post("/api/properties/newproperty",
           {
             imageUrl:url,
-            propertyAddress:propertyAddress,
-            type:type,
-            percentage:percentage,
-            yearBuilt:yearBuilt,
-            purchasePrice:purchasePrice,
-            purchaseDate:purchaseDate
+            apartmentAddress:apartmentAddress,
+            apartmentLocation:apartmentLocation,
+            apartmentName:apartmentName,
+            
           },
            config
           ) 
@@ -145,32 +142,7 @@ export default function AddProperty() {
   }
 
 
-   useEffect(()=>{
-   
-    if(type === "Off-plan"){
-      setYearBuilt(currYear)
-    }
 
-    },[type])
-
-
-   /*useEffect(()=>{
-
-    const fetchProperty = async() => {
-     
-    const {data} = await axios.post(`/api/properties/${address}`) 
-   
-    
-     setProperty(data.property[0]) 
-    
-    
-   }
-
-   fetchProperty()
-
-
- },[])*/
-  
   
   
   
@@ -184,10 +156,10 @@ export default function AddProperty() {
       <form id="survey-form" onSubmit={submitPropertyHandler}>
 
       <header className="header">
-        <h1 id="title" className="text-center">Add a New Property</h1>
+        <h1 id="title" className="text-center">Add a New Apartment</h1>
        { submitted===" " &&
         (<p id="description" className="propertyInstruction text-center">
-          Please tell us the details of this property
+          Please tell us the details of this apartment
         </p>)
         }
 
@@ -206,84 +178,74 @@ export default function AddProperty() {
             name="address"
             id="name"
             className="form-control"
-            placeholder="Enter the property's address "
-            value={propertyAddress} onChange={(e)=>setPropertyAddress(e.target.value)}
+            placeholder="Enter the apartment address "
+            value={apartmentAddress} onChange={(e)=>setApartmentAddress(e.target.value)}
             required
           />
         </div>
 
-        <div className="form-group">
-          <p>Type &nbsp;&nbsp; i.e Is it completed, or off-plan (currently being being built)?</p>
-          <select id="dropdown"  value={type}  name="type" className="form-control" onChange={(e)=>{setType(e.target.value); console.log(e.target.value)}}  required>
-            <option disabled selected value></option>
-            <option value={"Built"}  >Built</option>
-            <option value={"Off-plan"} >Off-plan</option>
-          </select>
-        </div>
-
-
-
 
 
         <div className="form-group">
-          <label id="number-label" for="number">Year Built<span className="clue">(optional)</span></label>
+          <label id="name-label" for="name">Apartment Location  &nbsp;&nbsp; (i.e which city and state?)</label>
           <input
-            type="number"
-            name="Year Built"
-            id="number"
-            min="1975"
-            value ={yearBuilt} onChange={(e)=>setYearBuilt(e.target.value)}
-            max={currYear} 
+            type="text"
+            name="address"
+            id="name"
             className="form-control"
-            placeholder=" Please enter the year"
-            
+            placeholder="Enter the apartment's location "
+            value={apartmentLocation} onChange={(e)=>setApartmentLocation(e.target.value)}
+            required
           />
         </div>
 
 
-        <div className="form-group">
+       {/* <div className="form-group">
+          <p>Apartment Location &nbsp;&nbsp; i.e which city and state?</p>
+          <select id="dropdown"  value={apartmentLocation}  name="type" className="form-control" onChange={(e)=>{setApartmentLocation(e.target.value); console.log(e.target.value)}}  required>
+            <option disabled selected value></option>
+            <option value={"Built"}  >Built</option>
+            <option value={"Off-plan"} >Off-plan</option>
+          </select>
+      </div> */}
+
+
+
+
+
+        
+
+
+        {/*<div className="form-group">
           <label id="number-label" for="purchaseDate"
             >Purchase Date<span className="clue">(leave blank if house not purchased)</span></label>
           
           <input type="date" id="purchaseDate" name="trip-start"
-       value={purchaseDate} onChange={(e)=>setPurchaseDate(e.target.value)}
+       value={purchaseDate onChange={(e)=>setPurchaseDate(e.target.value)}
        min="2016-01-01" max={date} className="form-control"/>
 
 
-        </div>
+      </div>*/}
         
         <div className="form-group">
-          <label id="email-label" for="purchasePrice">Purchase Price</label>
+          <label id="email-label" for="purchasePrice">Apartment Name</label>
           <input
             type="text"
             name="purchase price"
             id="purchasePrice"
             className="form-control"
-            placeholder="Enter the price in dollars"
-            value={purchasePrice} onChange={(e)=>setPurchasePrice(e.target.value)}
-            required
+            placeholder="Enter the name of the apartment"
+            value={apartmentName} onChange={(e)=>setApartmentName(e.target.value)}
+          
           />
         </div> 
 
-
-          <div className="form-group">
-          <label id="email-label" for="percentage">Percentage</label>
-          <input
-            type="text"
-            name="percentage"
-            id="percentage"
-            className="form-control"
-            placeholder="Enter percentage"
-            value={percentage} onChange={(e)=>setPercentage(e.target.value)}
-            required
-          />
-        </div> 
 
 
 
 
         <div className="form-group">
-        <label id="percentage-label" for="image">Property Image</label>
+        <label id="percentage-label" for="image">Apartment Image</label>
         <input 
         type="file"
         id="image"

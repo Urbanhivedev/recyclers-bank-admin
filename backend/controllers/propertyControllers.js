@@ -36,7 +36,7 @@ const storage = getStorage(app)
 const dbtest = getFirestore()
 
 const colRef = collection(dbtest , "apartments")
-const docRef = doc(dbtest, "estate","collection")
+const docRef = doc(dbtest, "apartments","collection")
 
 /**the arrays i will send in my fetch requests */
 let apartments = []
@@ -143,44 +143,30 @@ const getProperties = asyncHandler(async (req,res)=>{
   const addNewProperty = asyncHandler(async(req,res)=>{
     res.header("Access-Control-Allow-Origin","*")
     
-    const propertyAddress = req.body.propertyAddress
-    const purchasePrice = req.body.purchasePrice
-    const purchaseDate = req.body.purchaseDate
-    const yearBuilt = req.body.yearBuilt
-    const percentage = req.body.percentage
-    const type = req.body.type
+  
+    const apartmentName = req.body.apartmentName
+    const apartmentLocation = req.body.apartmentLocation
+    const  apartmentAddress = req.body. apartmentAddress
     const imageUrl = req.body.imageUrl
    
      
-  
     
    updateDoc(docRef, {
-    data:[...apartments[0].space,{
-      address:propertyAddress,
-      amountLeft:"",
-      earn:[""],
+    space:[...apartments[0].space,{
+      address:apartmentAddress,
       image:imageUrl,
-      images:[""],
-      monthlyIncome:"",
-      monthlyReturn:"",
-      percentage:percentage,
-      percentageReturn:"",
-      purchaseDate:purchaseDate,
-      purchasePrice:purchasePrice,
-      totalReturn:"",
-      type:type,
-      yearBuilt:yearBuilt
-
-
-
+      location:apartmentLocation,
+      logo:imageUrl,
+      name:apartmentName
 
     }]
 
    
 
    }).then(
-   
+    
      res.json({submitted:true}),
+     console.log("honky dory")
    )
 
 
