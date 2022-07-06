@@ -11,7 +11,10 @@ export default function Topbar(){
 
     const [userInfo,setUserInfo]  = useState(JSON.parse(window.sessionStorage.getItem('userInfo')))
 
-
+    useEffect(()=>{
+   setUserInfo(window.sessionStorage.getItem('userInfo'))
+    console.log(userInfo)
+    },[userInfo])
 
     return (
         
@@ -27,9 +30,9 @@ export default function Topbar(){
         {/*1*/}   <div className="topRight">
                         <div className="topbarIconContainer">
                           <span className="loggedUser">
-                          {userInfo.userInfo.firstName.toUpperCase()} 
+                          {userInfo.userInfo && userInfo.userInfo.firstName} 
                           {' '}
-                          {userInfo.userInfo.lastName.toUpperCase()}
+                          {userInfo.userInfo && userInfo.userInfo.lastName}
                           </span>
                           <Settings className="settingsIcon"/>
                          <NotificationsNone className="notificationIcon"/>

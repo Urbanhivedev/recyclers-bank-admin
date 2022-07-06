@@ -34,18 +34,20 @@ export default function Homepage() {
   const [userInfo,setUserInfo]  = useState(JSON.parse(window.sessionStorage.getItem('userInfo'))) 
   
 
-     useEffect(()=>{
+    useEffect(()=>{
   
     console.log(userInfo)
 
       if(userInfo === null){
         navigate('/')
        
-      }else{
-        navigate('/admin/propertylist/') /*just a makeshift re-navigation, until i can figure out what to do with my base path */
+      }
+     
+      else{
+        navigate('/admin/propertylist/') 
       }
   
-    },[userInfo,navigate])
+    },[userInfo])
 
     /*I am pushing people to login page if they dont have user info details, i.e they are not in END */
 
