@@ -49,7 +49,7 @@ let messages = []
   snapshot.docs.filter((doc)=>(doc.id === 'collection')).forEach((doc)=>{
    apartments.push({...doc.data(),id:doc.id})
   })
-  console.log(apartments[0].space)
+ /* console.log(apartments[0].space)*/
  
 })
 
@@ -72,7 +72,9 @@ onSnapshot(colRef,(snapshot) => {
 const getProperties = asyncHandler(async (req,res)=>{
     res.header("Access-Control-Allow-Origin","*")
     const pageSize = 3 // 3 per page as dean has asked
-       const page = Number(req.query.pageNumber) || 1
+      
+    
+    const page = Number(req.query.pageNumber) || 1
   
    
   let count;

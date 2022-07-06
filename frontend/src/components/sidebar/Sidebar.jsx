@@ -73,7 +73,7 @@ export default function Sidebar() {
                       {/*I had to assign each emoji component a classname here, to enforce background color*/ }
                      
                     
-                 <Link to ={"/admin/propertylist"} className="linkref">
+                 <Link to ={"/admin/propertylist/"} className="linkref">
                      <li className="sidebarListItem">
                          <PaidIcon  className="sidebarListItemIcon"/>
                          Manage Transactions
@@ -83,7 +83,7 @@ export default function Sidebar() {
 
 
 
-                     <Link  className="linkref" to={"/admin/userlist"}>
+                     <Link  className="linkref" to={"/admin/userlist/"}>
                      <li className="sidebarListItem">
                        
                          <SupervisedUserCircleIcon className="sidebarListItemIcon"/>
@@ -94,7 +94,7 @@ export default function Sidebar() {
 
 
 
-                    <Link  className="linkref" to={"/admin/propertylist"}>
+                    <Link  className="linkref" to={"/admin/propertylist/"}>
                      <li className="sidebarListItem">
                        
                          <MapsHomeWorkIcon className="sidebarListItemIcon"/>
@@ -106,7 +106,7 @@ export default function Sidebar() {
 
 
 
-                    <Link  className="linkref" to={"/admin/userlist"}>
+                    <Link  className="linkref" to={"/admin/userlist/"}>
                      <li className="sidebarListItem">
                        
                          <ReceiptIcon className="sidebarListItemIcon"/>

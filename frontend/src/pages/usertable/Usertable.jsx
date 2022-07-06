@@ -11,7 +11,7 @@ import {Table,Button} from 'react-bootstrap'
 
 import './usertable.css'
 
-import {Link, useNavigate} from "react-router-dom";
+import {Link, useNavigate, useParams} from "react-router-dom";
 
 import axios from 'axios'  
 
@@ -24,7 +24,9 @@ export default function Usertable() {
   /*I am pushing people to login page if they dont have user info details, i.e they are not in */
   const navigate = useNavigate()
   const [userInfo,setUserInfo]  = useState(JSON.parse(window.sessionStorage.getItem('userInfo'))) 
-   
+  const { pageNumber } = useParams();
+
+
      useEffect(()=>{
   
       if(userInfo === null){
@@ -44,7 +46,7 @@ export default function Usertable() {
 
     const fetchProperties = async() => {
      
-    const {data} = await axios.get('/api/users') //{data} is object destructuring from what we get back from axios , i totally forgot about object destructuring
+    const {data} = await axios.get(`/api/users/?pageNumber=${pageNumber}`) //{data} is object destructuring from what we get back from axios , i totally forgot about object destructuring
    
     console.log(data.users)
      setUserList(data.users)
@@ -56,7 +58,7 @@ export default function Usertable() {
    fetchProperties()
 
 /*no need to put any dependencies in use effect just yet, I want the fetch to happen only when the page is loaded */
- },[])
+ },[pageNumber])
   
   /*const users = [{
     _id:"1",

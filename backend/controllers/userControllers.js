@@ -140,6 +140,8 @@ const authUser = asyncHandler(async (req, res) => {
     const pageSize = 3 // 3 per page as dean has asked
        const page = Number(req.query.pageNumber) || 1
   
+
+       console.log("pageNumber is",req.query.pageNumber)
    
   let count;
   let propertylist;

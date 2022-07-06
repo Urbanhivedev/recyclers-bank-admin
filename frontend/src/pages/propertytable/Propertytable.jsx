@@ -13,7 +13,7 @@ import {LinkContainer} from 'react-router-bootstrap'
 
 import './propertytable.css'
 
-import {Link,useNavigate} from "react-router-dom";
+import {Link,useNavigate,useParams} from "react-router-dom";
 
 import axios from 'axios'  
 
@@ -27,6 +27,7 @@ export default function Propertytable() {
   /*I am pushing people to login page if they dont have user info details, i.e they are not in */
   const navigate = useNavigate()
   const [userInfo,setUserInfo]  = useState(JSON.parse(window.sessionStorage.getItem('userInfo'))) 
+  const { pageNumber } = useParams();
    
      useEffect(()=>{
   
@@ -47,23 +48,24 @@ export default function Propertytable() {
 
    useEffect(()=>{
 
-    const fetchProperties = async() => {
+    const fetchApartments = async() => {
      
-    const {data} = await axios.get('/api/properties') //{data} is object destructuring from what we get back from axios , i totally forgot about object destructuring
+    const {data} = await axios.get(`/api/properties/?pageNumber=${pageNumber}`) //{data} is object destructuring from what we get back from axios , i totally forgot about object destructuring
    
     console.log(data.properties)
+    console.log(data.page)
      setPropertyList(data.properties)
      setPage(data.page)
      setPages(data.pages)
 
    }
 
-   fetchProperties()
-
+   fetchApartments()
+   console.log(page + 2^(page-1))
 /*no need to put any dependencies in use effect just yet, I want the fetch to happen only when the page is loaded */
- },[])
+ },[pageNumber])
   
-
+ console.log(page,2^(page+1))
   
   
   return (
@@ -112,10 +114,10 @@ export default function Propertytable() {
            <th className='th'></th>
          </tr>
          
-         
+          
           {propertyList.map(property => (
             <tr className='tr' key={propertyList.indexOf(property)} >
-              <td className='td'>{propertyList.indexOf(property) + 1}</td>
+              <td className='td'>{(page) + (2*(page-1)) + propertyList.indexOf(property) }</td>
               <td className='td' >{property.name}</td>
               <td className='td backgroundColor'>{property.address}</td>
               <td className='td backgroundColor'>{property.location}</td>

@@ -1,11 +1,20 @@
 import React from 'react'
+import {useEffect} from 'react'
 import {LinkContainer} from 'react-router-bootstrap'
 import {Pagination} from 'react-bootstrap'
-import {Link} from "react-router-dom";
+import {Link,useLocation} from "react-router-dom";
 import './paginate.css'
 
 
 const Paginate = ({pages,page /*, isAdmin=false, keyword=''*/}) => {
+
+const {pathname} = useLocation()
+
+ 
+
+
+const list = pathname.substring(pathname.indexOf('/'),pathname.lastIndexOf('/'));
+console.log(list)
 
         return pages > 1 && (
          
@@ -30,14 +39,29 @@ const Paginate = ({pages,page /*, isAdmin=false, keyword=''*/}) => {
         </button>
         <div className="pages backgroundColor">
          
-        {[...Array(pages).keys()].map(x => (
-               <Link key={x+1} to={ `properties/page/${x+1}`} >
+        { list === '/admin/propertylist' &&
+        
+          [...Array(pages).keys()].map(x => (
+               <Link key={x+1} to={`/admin/propertylist/${x+1}`} >
   
             <a className={`page ${x+1===page && "active"}`}>{x+1}</a>
   
                </Link>
              ))}
-         
+
+
+{  list === '/admin/userlist' &&
+        
+        [...Array(pages).keys()].map(x => (
+             <Link key={x+1} to={`/admin/userlist/${x+1}`} >
+
+          <a className={`page ${x+1===page && "active"}`}>{x+1}</a>
+
+             </Link>
+           ))}
+
+
+        
   
   
   
